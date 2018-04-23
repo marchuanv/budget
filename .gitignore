@@ -57,3 +57,6 @@ typings/
 # dotenv environment variables file
 .env
 
+privatekey.json
+api.json
+nohup.out

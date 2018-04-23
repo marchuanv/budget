@@ -1,0 +1,27 @@
+{
+  "name": "budget",
+  "version": "1.0.0",
+  "description": "",
+  "main": "budget.js",
+  "engines": {
+    "node": "6.8.1",
+    "npm" : "3.10.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marchuanv/budget.git"
+  },
+  "author": "marchuan van der merwe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marchuanv/budget/issues"
+  },
+  "homepage": "https://github.com/marchuanv/budget#readme",
+  "dependencies": {
+    "libraryhost": "git+https://github.com/marchuanv/libraryhost.git"
+  },
+  "scripts": {
+    "preinstall": "npm update",
+    "start": "node ./node_modules/libraryhost/server.js $(realpath ./)"
+  }
+}
