@@ -3,5 +3,5 @@
 	"scripts":[
 		"budget.js"
 	],
-	"isnodejs":true
+	"isnodejs":false
 }]
