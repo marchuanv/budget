@@ -4,5 +4,6 @@
 		"budget.js"
 	],
 	"isnodejs":false,
-	"isdebug": true
+	"isdebug": true,
+	"dependencies":[]
 }]
