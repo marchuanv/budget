@@ -33,6 +33,7 @@ then
     echo "dependencies already installed moving on..." 
 else
 	echo "installing dependencies"
+	npm cache clean
 	npm install
 fi
 
