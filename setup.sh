@@ -10,11 +10,11 @@ function waitForDirectory(){
 }
 
 reset
-sudo fuser -k 5000/tcp
-sudo fuser -k 5000/tcp
-sudo fuser -k 5000/tcp
+sudo fuser -k 3600/tcp
+sudo fuser -k 3600/tcp
+sudo fuser -k 3600/tcp
 export PORT
-PORT=5000
+PORT=3600
 
 export libraryregisters
 libraryregisters='http://tidal:3000'
