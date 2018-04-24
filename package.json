@@ -24,6 +24,6 @@
   "scripts":{
     "preinstall": "npm update",
     "postinstall": "node node_modules/buildscripts/build.js budget 5000 $(realpath ./) 'http://Tidal:3000/'",
-    "start": "(nohup node node_modules/libraryhost/server.js &)"
+    "start": "node node_modules/libraryhost/server.js"
   }
 }
