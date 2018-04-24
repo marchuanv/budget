@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/marchuanv/budget#readme",
   "dependencies": {
-    "buildscripts": "git+https://github.com/marchuanv/buildscripts.git"
+    "libraryhost": "git+https://github.com/marchuanv/libraryhost.git"
   },
   "scripts":{
     "preinstall": "npm update",
