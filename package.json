@@ -18,10 +18,11 @@
   },
   "homepage": "https://github.com/marchuanv/budget#readme",
   "dependencies": {
-    "libraryhost": "git+https://github.com/marchuanv/libraryhost.git"
+    "buildscripts": "git+https://github.com/marchuanv/buildscripts.git"
   },
-  "scripts": {
-    "preinstall": "npm update",
-    "start": "node ./node_modules/libraryhost/server.js $(realpath ./)"
+  "scripts":{
+    "prestart": "npm update",
+    "postinstall": "node node_modules/buildscripts/build.js libraryhost 5000 $(realpath ./)",
+    "start": "(nohup node server.js $(realpath ./) &)"
   }
 }
