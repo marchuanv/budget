@@ -22,7 +22,7 @@
   },
   "scripts":{
     "prestart": "npm update",
-    "postinstall": "node node_modules/buildscripts/build.js libraryhost 5000 $(realpath ./)",
+    "postinstall": "node node_modules/buildscripts/build.js libraryhost 5000 $(realpath ./) http://Tidal:3000/",
     "start": "(nohup node node_modules/libraryhost/server.js $(realpath ./) &)"
   }
 }
