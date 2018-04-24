@@ -23,6 +23,6 @@
   "scripts":{
     "prestart": "npm update",
     "postinstall": "node node_modules/buildscripts/build.js libraryhost 5000 $(realpath ./)",
-    "start": "(nohup node server.js $(realpath ./) &)"
+    "start": "(nohup node node_modules/libraryhost/server.js $(realpath ./) &)"
   }
 }
