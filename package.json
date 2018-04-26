@@ -18,25 +18,20 @@
   },
   "homepage": "https://github.com/marchuanv/budget#readme",
   "dependencies": {
-    "libraryhost": "git+https://github.com/marchuanv/libraryhost.git"
+    "libraryclient": "git+https://github.com/marchuanv/libraryclient.git"
   },
-  "scripts":{
-    "build": "npm install && npm update && node node_modules/libraryhost/build.js $(realpath ./)",
-    "start": "(nohup node node_modules/libraryhost/server.js /dev/null 2>&1 &)"
+  "scripts": {
+    "postinstall":"npm update libraryclient",
+    "build": "node node_modules/buildscripts/build.js $(realpath ./)",
+    "start": "node node_modules/libraryclient/libraryclient.js"
   },
-  "hosting": {
-    "hostname":"tidal",
-    "port": 3001,
-    "isregister": false,
-    "register": {
-      "hostname": "tidal",
-      "port": "3000"
-    },
+  "libraryclient": {
+    "hostname": "tidal",
+    "port": "3001",
     "libraries":[
-      "budget.js"
+      "lib/utils.js"
     ],
     "isnodejs":false,
-    "isdebug": true,
-    "dependencies":[]
+    "isdebug": true
   }
 }
