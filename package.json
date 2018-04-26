@@ -1,5 +1,7 @@
 {
   "name": "budget",
+  "hostname":"tidal",
+  "port": 3001,
   "version": "1.0.0",
   "description": "",
   "main": "budget.js",
@@ -26,8 +28,6 @@
     "start": "node node_modules/libraryclient/libraryclient.js"
   },
   "libraryclient": {
-    "hostname": "tidal",
-    "port": "3001",
     "libraries":[
       "lib/utils.js"
     ],
