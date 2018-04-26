@@ -1,6 +1,6 @@
 {
   "name": "budget",
-  "hostname":"tidal",
+  "host":"tidal",
   "port": 3001,
   "version": "1.0.0",
   "description": "",
@@ -27,11 +27,11 @@
     "build": "npm update buildscripts && node node_modules/buildscripts/build.js $(realpath ./)",
     "start": "node node_modules/libraryclient/libraryclient.js"
   },
-  "libraryclient": {
-    "libraries":[
-      "lib/utils.js"
-    ],
-    "isnodejs":false,
-    "isdebug": true
+  "libraries":[
+    "lib/utils.js"
+  ],
+  "server":{
+    "host":"tidal",
+    "port":3000
   }
 }
