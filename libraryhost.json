@@ -1,9 +1,0 @@
-[{
-	"name":"budget",
-	"scripts":[
-		"budget.js"
-	],
-	"isnodejs":false,
-	"isdebug": true,
-	"dependencies":[]
-}]

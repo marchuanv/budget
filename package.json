@@ -21,7 +21,22 @@
     "libraryhost": "git+https://github.com/marchuanv/libraryhost.git"
   },
   "scripts":{
-    "build": "npm install && npm update && node node_modules/buildscripts/build.js budget 3003 $(realpath ./) 'http://Tidal:3000/'",
+    "build": "npm install && npm update && node node_modules/libraryhost/build.js $(realpath ./)",
     "start": "(nohup node node_modules/libraryhost/server.js /dev/null 2>&1 &)"
+  },
+  "hosting": {
+    "hostname":"tidal",
+    "port": 3001,
+    "isregister": false,
+    "register": {
+      "hostname": "tidal",
+      "port": "3000"
+    },
+    "libraries":[
+      "budget.js"
+    ],
+    "isnodejs":false,
+    "isdebug": true,
+    "dependencies":[]
   }
 }
