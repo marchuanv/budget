@@ -30,8 +30,5 @@
   "libraries":[
     "lib/utils.js"
   ],
-  "server":{
-    "host":"tidal",
-    "port":3000
-  }
+  "registerurl": "http://tidal:3000/"
 }
