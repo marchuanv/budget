@@ -30,7 +30,7 @@
   "libraries":[
     "budget.js"
   ],
-  "isnodelibrary": true,
+  "isnodelibrary": false,
   "registerurl": "http://tidal:3000/",
   "isdebug": true
 }
