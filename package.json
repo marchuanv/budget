@@ -4,7 +4,7 @@
   "port": 3001,
   "version": "1.0.0",
   "description": "",
-  "main": "budget.js",
+  "main": "",
   "engines": {
     "node": "6.8.1",
     "npm" : "3.10.8"
