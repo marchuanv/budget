@@ -30,5 +30,7 @@
   "libraries":[
     "lib/utils.js"
   ],
-  "registerurl": "http://tidal:3000/"
+  "isnodelibrary": false,
+  "registerurl": "http://tidal:3000/",
+  "isdebug": true
 }
