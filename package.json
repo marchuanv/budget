@@ -2,6 +2,7 @@
   "name": "budget",
   "host":"tidal",
   "port": 3001,
+  "isdebug": true,
   "version": "1.0.0",
   "description": "",
   "main": "",
@@ -24,13 +25,12 @@
     "libraryclient": "git+https://github.com/marchuanv/libraryclient.git"
   },
   "scripts": {
-    "build": "npm update buildscripts && node node_modules/buildscripts/build.js $(realpath ./)",
+    "prestart": "npm install && npm update buildscripts && npm update libraryclient",
     "start": "node node_modules/libraryclient/libraryclient.js"
   },
   "libraries":[
     "budget.js"
   ],
   "isnodelibrary": false,
-  "registerurl": "http://tidal:3000/",
-  "isdebug": false
+  "registerurl": "http://tidal:3000/"
 }
