@@ -29,7 +29,7 @@
     "start": "node node_modules/libraryclient/libraryclient.js"
   },
   "libraries":[
-    { "name":"budget.js", "isexternal":false }
+    { "name":"budget", "isexternal":false, "extension":".js" }
   ],
   "isnodelibrary": false,
   "registerurl": "http://tidal:3000/"
