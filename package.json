@@ -23,7 +23,7 @@
   "dependencies": {
     "buildscripts": "git+https://github.com/marchuanv/buildscripts.git",
     "libraryclient": "git+https://github.com/marchuanv/libraryclient.git",
-    "factory": "libraryhost+https://github.com/marchuanv/factory.git"
+    "factory": ""
   },
   "scripts": {
     "build": "npm install && npm update buildscripts && npm update libraryclient",
