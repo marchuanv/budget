@@ -22,15 +22,13 @@
   "homepage": "https://github.com/marchuanv/budget#readme",
   "dependencies": {
     "buildscripts": "git+https://github.com/marchuanv/buildscripts.git",
-    "libraryclient": "git+https://github.com/marchuanv/libraryclient.git"
+    "libraryclient": "git+https://github.com/marchuanv/libraryclient.git",
+    "factory": "libraryhost+https://github.com/marchuanv/factory.git"
   },
   "scripts": {
     "build": "npm install && npm update buildscripts && npm update libraryclient",
     "start": "node node_modules/libraryclient/libraryclient.js"
   },
-  "libraries":[
-    { "name":"budget", "isexternal":false, "extension":".js" }
-  ],
   "isnodelibrary": false,
   "registerurl": "http://localhost:3000/"
 }
