@@ -1,7 +1,15 @@
 {
   "name": "budget",
+  
   "host": "tidal",
   "port": 3001,
+  
+  "eventhost": "tidal",
+  "eventport": 4000,
+  
+  "registerhost": "tidal",
+  "registerport": 3000,
+
   "priority":4,
   "isregister": false,
   "isdebug": true,
