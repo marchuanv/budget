@@ -1,16 +1,12 @@
 {
   "name": "budget",
-  
-  "host": "tidal",
-  "port": 3001,
-  
-  "eventhost": "tidal",
+  "host": 3001,
+  "port": "Tidal",
+  "eventhost": "Tidal",
   "eventport": 4000,
-  
   "registerhost": "tidal",
   "registerport": 3000,
-
-  "priority":4,
+  "priority": 4,
   "isregister": false,
   "isdebug": true,
   "version": "1.0.0",
@@ -22,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/marchuanv/budget.git"
+    "url": "https://github.com/marchuanv/budget.git"
   },
   "author": "marchuan van der merwe",
   "license": "ISC",
