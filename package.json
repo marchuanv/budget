@@ -5,7 +5,7 @@
   "eventhost": "Tidal",
   "eventport": 0,
   "factoryhost": "Tidal",
-  "factoryport": null,
+  "factoryport": 3000,
   "isdebug": true,
   "version": "1.0.0",
   "description": "",
@@ -25,11 +25,9 @@
   },
   "homepage": "https://github.com/marchuanv/budget#readme",
   "dependencies": {
-    "factory": "git+https://github.com/marchuanv/factory.git"
+    "eventpublisher": "git+https://github.com/marchuanv/eventpublisher.git"
   },
   "scripts": {
-    "preinstall": "npm update",
-    "start": "node node_modules/factory/server.js",
-    "stop": "node node_modules/factory/server.stop.js"
+    "preinstall": "npm update"
   }
 }
