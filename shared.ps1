@@ -142,15 +142,6 @@ Function Get-ModuleDependencies ($moduleName, $modules) {
         if ($module.name -eq $moduleName) {
             foreach($modRef in $module.modules) {
                 $null=$dependantModules.Add($modRef)
-<<<<<<< HEAD
-=======
-                if ($modRef.ishardreference -eq $true){
-                    $depModules=Get-ModuleDependencies $modRef.name $modules
-                    foreach($modRef2 in $depModules) {
-                        $null=$dependantModules.Add($modRef2)
-                    }
-                }
->>>>>>> c1c5eecf94946dc677f992f93d34ee2701587ff1
             }
         }
     }
