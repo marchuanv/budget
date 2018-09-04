@@ -9,7 +9,6 @@
 	],
 	"schedules":[{
 		"classname":"Balance",
-		"functionname":"calculate",
-		"intervals":240000
+		"functionname":"calculate"
 	}]
 }
