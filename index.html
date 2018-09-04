@@ -6,18 +6,24 @@
 	</head>
 	<body>
 		<script type="text/javascript">
+			function submit(){};
 			api().then((api)=>{
-				const balance=parseFloat(api.config.totalbalance);
 				const utils = new api.Utils();
-				const remainingDays = utils.getRemainingDaysInCurrentMonth();
-				const dailyAmount = (balance/remainingDays);
-				document.getElementById("total").value =  balance;
-				document.getElementById("daily").value =  Math.round(dailyAmount * 100) / 100;
+				api.loadData().then((data)=>{
+					const availableBalance=parseFloat(data.availablebalance);
+					const remainingDays = utils.getRemainingDaysInCurrentMonth();
+					const dailyAmount = (availableBalance/remainingDays);
+					document.getElementById("daily").value = (Math.round(dailyAmount * 100) / 100);
+					submit=()=>{
+						data.availablebalance=document.getElementById("expend").value;
+						api.saveData(data)
+					}
+				});
 			});
+			
 		</script>
 		<p>Daily Expenditure: <input type="text" id="expend" value=""/></p>
-		<p>Daily Balance: <input type="text" id="daily" value=""/></p>
-		<p>Total Balance: <input type="text" id="total" value=""/></p>
-		<button>Submit</button>
+		<p>Daily Available: <input type="text" id="daily" value=""/></p>
+		<button onclick="submit()">Submit</button>
 	</body>
 </html>
