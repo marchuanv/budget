@@ -16,7 +16,7 @@
 					document.getElementById("daily").value = (Math.round(dailyAmount * 100) / 100);
 					document.getElementById("expend").value = (Math.round(data.dailyexpenditure * 100) / 100);
 					submit=()=>{
-						data.dailyexpenditure=document.getElementById("expend").value;
+						data.dailyexpenditure=parseFloat(document.getElementById("expend").value);
 						api.saveData(data)
 					}
 				});
