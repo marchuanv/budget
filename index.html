@@ -11,6 +11,7 @@
 				const utils = new api.Utils();
 				const remainingDays = utils.getRemainingDaysInCurrentMonth();
 				const dailyAmount = (balance/remainingDays);
+				document.getElementById("total").value =  balance;
 				document.getElementById("daily").value =  Math.round(dailyAmount * 100) / 100;
 			});
 		</script>
