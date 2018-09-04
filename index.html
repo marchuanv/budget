@@ -14,9 +14,9 @@
 					const remainingDays = utils.getRemainingDaysInCurrentMonth();
 					const dailyAmount = (availableBalance/remainingDays);
 					document.getElementById("daily").value = (Math.round(dailyAmount * 100) / 100);
-					document.getElementById("expend").value = (Math.round(data.availablebalance * 100) / 100);
+					document.getElementById("expend").value = (Math.round(data.dailyexpenditure * 100) / 100);
 					submit=()=>{
-						data.availablebalance=document.getElementById("expend").value;
+						data.dailyexpenditure=document.getElementById("expend").value;
 						api.saveData(data)
 					}
 				});
