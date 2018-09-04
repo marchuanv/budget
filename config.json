@@ -6,5 +6,11 @@
 	"username":"marchuanv",
 	"dependencies": [
 		"utils-api"
-	]
+	],
+	"schedules":[{
+		"name":"BalanceUpdate",
+		"filename":"balance.js",
+		"functionname":"calculate",
+		"date":"Tue Sep 04 2018 23:59:60 GMT+0200 (South Africa Standard Time)"
+	}]
 }
