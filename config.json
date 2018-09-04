@@ -1,10 +1,1 @@
-{
-	"gitname":"budget",
-	"protocol":"https",
-	"host":"marchuanv.herokuapp.com",
-	"port":"443",
-	"username":"marchuanv",
-	"dependencies": [
-		"utils-api"
-	]
-}
+data.json
