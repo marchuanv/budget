@@ -5,8 +5,6 @@
 		<title>Budget</title>
 	</head>
 	<body>
-		<p>Daily Balance: <input type="text" id="daily" value=""/></p>
-		<p>Total Balance: <input type="text" id="total" value="3508.10"/></p>
 		<script type="text/javascript">
 			api().then((api)=>{
 				const balance=parseFloat(document.getElementById("total").value);
@@ -16,5 +14,8 @@
 				document.getElementById("daily").value =  Math.round(dailyAmount * 100) / 100;
 			});
 		</script>
+		<p>Daily Balance: <input type="text" id="daily" value=""/></p>
+		<p>Total Balance: <input type="text" id="total" value="3508.10"/></p>
+		<button>Submit</button>
 	</body>
 </html>
