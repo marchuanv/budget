@@ -11,7 +11,7 @@
 				const balance=parseFloat("3508.10");
 				const utils = new api.Utils();
 				const remainingDays = utils.getRemainingDaysInCurrentMonth();
-				document.getElementById("budget").innerHTML = `R ${Math.round((balance/remainingDays))}`;
+				document.getElementById("budget").innerHTML = `R ${Math.round((balance/remainingDays),2)}`;
 			});
 		</script>
 	</body>
