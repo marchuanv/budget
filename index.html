@@ -5,9 +5,16 @@
 		<title>Budget</title>
 	</head>
 	<body>
+		<p id="budget"></p>
 		<script type="text/javascript">
-			api().then((api)=>{
-			});
+			document.getElementById("budget").innerHTML = (function getDailySpent(){
+				return await api().then((api)=>{
+					const balance=parseFloat("3508.10");
+					const utils = new api.Utils();
+					const remainingDays = utils.getRemainingDaysInCurrentMonth();
+					return await (balance/remainingDays);
+				});
+			})();
 		</script>
 	</body>
 </html>
