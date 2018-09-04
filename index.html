@@ -7,7 +7,7 @@
 	<body>
 		<p id="budget"></p>
 		<script type="text/javascript">
-			document.getElementById("budget").innerHTML = (function getDailySpent(){
+			document.getElementById("budget").innerHTML = (async()=>{
 				return await api().then((api)=>{
 					const balance=parseFloat("3508.10");
 					const utils = new api.Utils();
