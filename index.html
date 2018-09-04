@@ -7,7 +7,7 @@
 	<body>
 		<script type="text/javascript">
 			api().then((api)=>{
-				const balance=parseFloat(document.getElementById("total").value);
+				const balance=parseFloat(api.config.totalbalance);
 				const utils = new api.Utils();
 				const remainingDays = utils.getRemainingDaysInCurrentMonth();
 				const dailyAmount = (balance/remainingDays);
