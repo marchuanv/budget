@@ -5,14 +5,15 @@
 		<title>Budget</title>
 	</head>
 	<body>
-		<input type="text" id="balance" value="3508.10"/>
-		<p id="budget"></p>
+		<p>Balance: <input type="text" id="balance" value="3508.10"/></p>
+		<p>Balance: <input type="text" id="budget" value=""/></p>
 		<script type="text/javascript">
 			api().then((api)=>{
 				const balance=parseFloat(document.getElementById("balance").value);
 				const utils = new api.Utils();
 				const remainingDays = utils.getRemainingDaysInCurrentMonth();
-				document.getElementById("budget").innerHTML = `Daily Spent: R ${Math.round((balance/remainingDays),2)}`;
+				const dailyAmount = (balance/remainingDays);
+				document.getElementById("budget").value =  Math.round(dailyAmount * 100) / 100;
 			});
 		</script>
 	</body>
