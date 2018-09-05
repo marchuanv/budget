@@ -6,9 +6,5 @@
 	"username":"marchuanv",
 	"dependencies": [
 		"utils-api"
-	],
-	"schedules":[{
-		"classname":"Balance",
-		"functionname":"calculate"
-	}]
+	]
 }
