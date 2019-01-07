@@ -4,9 +4,9 @@
 	"host":"marchuanv.herokuapp.com",
 	"port":"443",
 	"username":"marchuanv",
-	"libraries": [{
-		"filename": "balance.js",
-		"schedulefunc": "calculate"
+	"schedules": [{
+		"script": "lib/balance.js",
+		"function": "calculate"
 	}],
 	"dependencies": [
 		"utils-api"
