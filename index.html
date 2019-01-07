@@ -10,11 +10,11 @@
 			api().then((api)=>{
 				const utils = new api.Utils();
 				api.loadData().then((data)=>{
-					const availableBalance=parseFloat(data.availablebalance);
+					const availableBalance=parseFloat(data.balance);
 					const remainingDays = utils.getRemainingDaysInCurrentMonth();
 					const dailyAmount = (availableBalance/remainingDays);
 					document.getElementById("daily").value = (Math.round(dailyAmount * 100) / 100);
-					document.getElementById("expend").value = (Math.round(data.dailyexpenditure * 100) / 100);
+					document.getElementById("balance").value = availableBalance;
 					submit=()=>{
 						data.dailyexpenditure=parseFloat(document.getElementById("expend").value);
 						api.saveData(data)
@@ -23,8 +23,7 @@
 			});
 			
 		</script>
-		<p>Daily Expenditure: <input type="text" id="expend" value=""/></p>
-		<p>Daily Available: <input type="text" id="daily" value=""/></p>
-		<button onclick="submit()">Submit</button>
+		<p>Daily Expenditure: <input type="text" id="daily" value=""/></p>
+		<p>Total Balance: <input type="text" id="balance" value=""/></p>
 	</body>
 </html>
