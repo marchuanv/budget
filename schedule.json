@@ -2,6 +2,5 @@
     "data":{
         "availablebalance": 3032.54
     },
-    "date": "",
-    "runsperday": 1
+    "intervalinseconds": 60000
 }
