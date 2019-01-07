@@ -1,1 +1,4 @@
-function Schedule(){ this.run=async()=>{}}
+function Schedule(data) {
+  this.run=async()=>{
+  }
+}
