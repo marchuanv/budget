@@ -6,7 +6,8 @@
 	"username":"marchuanv",
 	"schedules": [{
 		"script": "lib/balance.js",
-		"function": "calculate"
+		"function": "calculate",
+		"classname":"Balance"
 	}],
 	"dependencies": [
 		"utils-api"
