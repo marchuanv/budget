@@ -1,8 +1,6 @@
 function Schedule(data) {
   this.run=async()=>{
-    if (data.balance >== 0){
-      console.log("Running total.");
-    } else {
+    if (isNaN(data.balance)) {
       data.balance = 0;
     }
   }
