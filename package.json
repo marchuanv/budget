@@ -15,7 +15,7 @@
     "type": "git",
     "url": "git+ssh://git@github.com/marchuanv/budget.git"
   },
-  "dependencies": [
+  "remotemodules": [
 	"utils-api"
   ],
   "author": "Marchuan Van Der Merwe",
