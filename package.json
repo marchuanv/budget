@@ -1,8 +1,12 @@
 {
+	"username":"marchuanv",
   "name": "budget",
   "version": "1.0.0",
+  "host":"marchuanv.herokuapp.com",
+	"port":"443",
   "description": "Daily spend limit",
   "main": "",
+	"protocol":"https",
   "engines": {
     "node": "8.11.3",
     "npm": "4.2.0"
@@ -11,6 +15,9 @@
     "type": "git",
     "url": "git+ssh://git@github.com/marchuanv/budget.git"
   },
+ 	"dependencies": [
+		"utils-api"
+	]
   "author": "Marchuan Van Der Merwe",
   "license": "ISC",
   "bugs": {
