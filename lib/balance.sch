@@ -1,4 +1,0 @@
-{
-  "classname":"Balance",
-  "functionname":"calculate"
-}
