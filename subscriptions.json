@@ -1,0 +1,13 @@
+[{
+  "id":"DailyCalculation",
+  "classname":"Budget",
+  "functionname","calculate"
+},{
+  "id":"RemainingDaysInCurrentMonth",
+  "classname":"Utils",
+  "functionname","getRemainingDaysInCurrentMonth"
+},{
+  "id":"SetBalance",
+  "classname":"Budget",
+  "functionname","setBalance"
+}]
