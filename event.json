@@ -1,3 +1,12 @@
 [
-    null
+    {
+        "modulename": "budget",
+        "classname": "Balance",
+        "events": []
+    },
+    {
+        "modulename": "utils-api",
+        "classname": "Utils",
+        "events": []
+    }
 ]
