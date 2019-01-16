@@ -6,6 +6,7 @@
 	</head>
 	<body>
 		<script type="text/javascript">
+			
 			client.subscribe("DailyCalculation", (data, error)=>{
 				if (error) throw error;
 				const availableBalance=parseFloat(data.balance);
@@ -17,12 +18,17 @@
 					document.getElementById("balance").value = availableBalance;
 				});
 			});
-			const balance=parseFloat(document.getElementById("balance").value);
-			client.publish("SetBalance", balance);
+			
 			client.publish("DailyCalculation");
-			client.publish("RemainingDaysInCurrentMonth");
+			client.publish("RemainingDaysInCurrentMonth");	
+			
+			function newBalance(){
+				const balance=parseFloat(document.getElementById("balance").value);
+				client.publish("SetBalance", balance);
+			};
+			
 		</script>
-		<p>Total Balance: <input type="text" id="balance" placeholder="enter total balance here..." value=""/></p>
+		<p>Total Balance: <input type="text" id="balance" placeholder="enter total balance here..." value="" onchange="newBalance()"/></p>
 		<p id="daily">Daily Expenditure: 0</p>
 	</body>
 </html>
