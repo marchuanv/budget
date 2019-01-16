@@ -1,13 +1,16 @@
 [{
   "id":"DailyCalculation",
   "classname":"Budget",
-  "functionname":"calculate"
+  "functionname":"calculate",
+  "recurring": true
 },{
   "id":"RemainingDaysInCurrentMonth",
   "classname":"Utils",
-  "functionname":"getRemainingDaysInCurrentMonth"
+  "functionname":"getRemainingDaysInCurrentMonth",
+  "recurring": true
 },{
   "id":"SetBalance",
   "classname":"Budget",
-  "functionname":"setBalance"
+  "functionname":"setBalance",
+  "recurring": false
 }]
