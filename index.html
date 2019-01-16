@@ -14,10 +14,10 @@
 				client.publish("RemainingDaysInCurrentMonth");
 			};
 			client.subscribe("DailyCalculation", (data, error)=>{
-				if (error) throw error.data;
+				if (error) throw error;
 				const availableBalance=parseFloat(data.balance);
 				client.subscribe("RemainingDaysInCurrentMonth", (data2, error2)=>{
-					if (error2) throw error2.data;
+					if (error2) throw error2;
 					const remainingDays = data2.days;
 					const dailyAmount = (availableBalance/remainingDays);	
 					document.getElementById("daily").value = (Math.round(dailyAmount * 100) / 100);
