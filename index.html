@@ -19,8 +19,7 @@
 				if (error) throw error;
 				client.subscribe("GetRemainingBalance", (data, error)=>{
 					if (error) throw error;
-					remainingBalance = parseFloat();
-					calculateDailyExpenditure(data.days, data.balance);
+					calculateDailyExpenditure(data.days, parseFloat(data.balance));
 				});
 				client.publish("GetRemainingBalance");
 			});
