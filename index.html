@@ -17,9 +17,9 @@
 			
 			client.subscribe("GetRemainingDaysInCurrentMonth", (data, error)=>{
 				if (error) throw error;
-				client.subscribe("GetRemainingBalance", (data, error)=>{
-					if (error) throw error;
-					calculateDailyExpenditure(data.days, parseFloat(data.balance));
+				client.subscribe("GetRemainingBalance", (data2, error2)=>{
+					if (error2) throw error2;
+					calculateDailyExpenditure(data.days, parseFloat(data2.balance));
 				});
 				client.publish("GetRemainingBalance");
 			});
