@@ -6,13 +6,7 @@
 	</head>
 	<body>
 		<script type="text/javascript">
-			const client = new Client();
-			function submit(){
-				const balance=parseFloat(document.getElementById("balance").value);
-				client.publish("SetBalance", balance);
-				client.publish("DailyCalculation");
-				client.publish("RemainingDaysInCurrentMonth");
-			};
+			
 			client.subscribe("DailyCalculation", (data, error)=>{
 				if (error) throw error;
 				const availableBalance=parseFloat(data.balance);
@@ -24,9 +18,12 @@
 					document.getElementById("balance").value = availableBalance;
 				});
 			});
+			const balance=parseFloat(document.getElementById("balance").value);
+			client.publish("SetBalance", balance);
+			client.publish("DailyCalculation");
+			client.publish("RemainingDaysInCurrentMonth");
 		</script>
 		<p>Daily Expenditure: <input type="text" id="daily" value=""/></p>
-		<p>Total Balance: <input type="text" id="balance" value=""/></p>
-		<input type="button" id="submit" onclick="submit()" value="Submit" />
+		<p>Total Balance: <input type="text" id="balance" placeholder="enter total balance here..." value=""/></p>
 	</body>
 </html>
