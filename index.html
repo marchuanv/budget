@@ -22,10 +22,9 @@
 					remainingBalance = parseFloat();
 					calculateDailyExpenditure(data.days, data.balance);
 				});
+				client.publish("GetRemainingBalance");
 			});
-			
 			client.publish("GetRemainingDaysInCurrentMonth");
-			client.publish("GetRemainingBalance");
 			
 			function newBalance(){
 				const balance=parseFloat(document.getElementById("balance").value);
