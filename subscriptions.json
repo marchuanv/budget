@@ -2,15 +2,15 @@
   "id":"DailyCalculation",
   "classname":"Balance",
   "functionname":"calculate",
-  "recurring": true
+  "recurringSeconds": 90000
 },{
   "id":"RemainingDaysInCurrentMonth",
   "classname":"Utils",
   "functionname":"getRemainingDaysInCurrentMonth",
-  "recurring": true
+  "recurringSeconds": 90000
 },{
   "id":"SetBalance",
   "classname":"Balance",
   "functionname":"setBalance",
-  "recurring": false
+  "recurringSeconds": 0
 }]
