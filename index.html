@@ -6,7 +6,7 @@
 	</head>
 	<body>
 		<script type="text/javascript">
-			const client = new Client();
+			const client = new Client("budgetclient");
 			client.subscribe("DailyCalculation", (data, error)=>{
 				if (error) throw error;
 				const availableBalance=parseFloat(data.balance);
