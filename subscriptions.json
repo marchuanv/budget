@@ -1,11 +1,11 @@
 [{
-  "id":"DailyCalculation",
+  "id":"GetRemainingBalance",
   "classname":"Balance",
   "functionname":"calculate",
   "modulename":"budget",
   "recurringSeconds": 90000
 },{
-  "id":"RemainingDaysInCurrentMonth",
+  "id":"GetRemainingDaysInCurrentMonth",
   "classname":"Utils",
   "functionname":"getRemainingDaysInCurrentMonth",
   "modulename":"utils-api",
