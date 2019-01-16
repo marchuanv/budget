@@ -13,9 +13,11 @@
 				client.publish("DailyCalculation");
 				client.publish("RemainingDaysInCurrentMonth");
 			};
-			client.subscribe("DailyCalculation", (data)=>{
+			client.subscribe("DailyCalculation", (data, error)=>{
+				if (error) throw error.data;
 				const availableBalance=parseFloat(data.balance);
-				client.subscribe("RemainingDaysInCurrentMonth", (data2)=>{
+				client.subscribe("RemainingDaysInCurrentMonth", (data2, error2)=>{
+					if (error2) throw error2.data;
 					const remainingDays = data2.days;
 					const dailyAmount = (availableBalance/remainingDays);	
 					document.getElementById("daily").value = (Math.round(dailyAmount * 100) / 100);
