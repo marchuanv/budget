@@ -1,6 +1,6 @@
 [{
   "id":"DailyCalculation",
-  "classname":"Budget",
+  "classname":"Balance",
   "functionname":"calculate",
   "recurring": true
 },{
@@ -10,7 +10,7 @@
   "recurring": true
 },{
   "id":"SetBalance",
-  "classname":"Budget",
+  "classname":"Balance",
   "functionname":"setBalance",
   "recurring": false
 }]
