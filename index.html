@@ -10,6 +10,8 @@
 			function submit(){
 				const balance=parseFloat(document.getElementById("balance").value);
 				client.publish("SetBalance", balance);
+				client.publish("DailyCalculation");
+				client.publish("RemainingDaysInCurrentMonth");
 			};
 			client.subscribe("DailyCalculation", (data)=>{
 				const availableBalance=parseFloat(data.balance);
