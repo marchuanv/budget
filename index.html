@@ -15,19 +15,18 @@
 				document.getElementById("balance").value = remainingBalance;
 			};
 			
-			client.subscribe("GetRemainingDaysInCurrentMonth", (data, error)=>{
-				if (error) throw error;
-				client.subscribe("GetRemainingBalance", (data2, error2)=>{
+			client.subscribe("utils-api", "Utils", "getRemainingDaysInCurrentMonth", true, (data, error)=>{
+				if (error) throw error;	
+				client.subscribe("budget", "Balance", "setBalance", false, (data2, error2)=>{
 					if (error2) throw error2;
 					calculateDailyExpenditure(data.days, parseFloat(data2.balance));
 				});
-				
 			});
 			
 			function newBalance(){
 				const balance=parseFloat(document.getElementById("balance").value);
 				client.publish("SetBalance", balance);
-				client.publish("GetRemainingBalance");
+				client.publish("budget", "Balance", "calculate");
 				client.publish("GetRemainingDaysInCurrentMonth");
 			};
 			
