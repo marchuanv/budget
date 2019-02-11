@@ -15,8 +15,8 @@
 				document.getElementById("balance").value = remainingBalance;
 			};
 			
-			client.subscribe("utils-api", "Utils", "getRemainingDaysInCurrentMonth").then(()=>{
-				client.subscribe("budget", "Balance", "setBalance").then(()=>{
+			client.subscribe("utils-api", "Utils", "getRemainingDaysInCurrentMonth").then((data)=>{
+				client.subscribe("budget", "Balance", "setBalance").then((data2)=>{
 					calculateDailyExpenditure(data.days, parseFloat(data2.balance));
 				});
 			}).catch((error)=>{
