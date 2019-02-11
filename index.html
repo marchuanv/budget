@@ -25,7 +25,7 @@
 			
 			function newBalance(){
 				const balance=parseFloat(document.getElementById("balance").value);
-				client.publish("budget", "Balance", "setBalance", [balance]);
+				client.publish("budget", "Balance", "setBalance", {balance});
 				client.publish("budget", "Balance", "calculate");
 				client.publish("utils-api", "Utils", "getRemainingDaysInCurrentMonth");
 			};
