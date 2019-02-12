@@ -10,25 +10,25 @@
 			const client = new Client("budgetclient");
 			
 			function calculateDailyExpenditure(remainingDays, remainingBalance) {
-				const dailyAmount = (remainingBalance/remainingDays);	
+				const dailyAmount = (remainingBalance/remainingDays);
 				document.getElementById("daily").innerText = `Daily Expenditure: ${(Math.round(dailyAmount * 100) / 100)}`;
 				document.getElementById("balance").value = remainingBalance;
 			};
-			
-			client.subscribe("utils-api", "Utils", "getRemainingDaysInCurrentMonth").then((data)=>{
-				client.subscribe("budget", "Balance", "setBalance").then((data2)=>{
-					calculateDailyExpenditure(data.days, parseFloat(data2.balance));
-				});
-			}).catch((error)=>{
-				throw error;	
-			});
-			
+
 			function newBalance(){
 				const balance=parseFloat(document.getElementById("balance").value);
 				client.publish("budget", "Balance", "setBalance", {balance});
-				client.publish("budget", "Balance", "calculate");
-				client.publish("utils-api", "Utils", "getRemainingDaysInCurrentMonth");
 			};
+			
+			client.publish("budget", "Balance", "calculate");
+			
+			client.publish("budget", "Balance", "getBalance");
+			client.publish("utils-api", "Utils", "getRemainingDaysInCurrentMonth");
+			client.subscribe("budget", "Balance", "getBalance").then((balance)=>{
+				client.subscribe("utils-api", "Utils", "getRemainingDaysInCurrentMonth").then((days)=>{
+					calculateDailyExpenditure(days, parseFloat(balance));
+				});
+			});
 			
 		</script>
 		<p>Total Balance: <input type="text" id="balance" placeholder="enter total balance here..." value="" onchange="newBalance()"/></p>
