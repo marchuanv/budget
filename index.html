@@ -8,25 +8,22 @@
 		<script type="text/javascript">
 			
 			const client = new Client("budgetclient");
-			
-			function calculateDailyExpenditure(remainingDays, remainingBalance) {
-				const dailyAmount = (remainingBalance/remainingDays);
-				document.getElementById("daily").innerText = `Daily Expenditure: ${(Math.round(dailyAmount * 100) / 100)}`;
-				document.getElementById("balance").value = remainingBalance;
-			};
 
 			function newBalance(){
 				const balance=parseFloat(document.getElementById("balance").value);
 				client.publish("budget", "Balance", "setBalance", {balance});
 			};
 			
-			client.publish("budget", "Balance", "calculate");
-			
 			client.publish("budget", "Balance", "getBalance");
 			client.publish("utils-api", "Utils", "getRemainingDaysInCurrentMonth");
-			client.subscribe("budget", "Balance", "getBalance").then((balance)=>{
-				client.subscribe("utils-api", "Utils", "getRemainingDaysInCurrentMonth").then((days)=>{
-					calculateDailyExpenditure(days, parseFloat(balance));
+			
+			client.subscribe("budget", "Balance", "getBalance").then((remainingBalance)=>{
+				client.subscribe("utils-api", "Utils", "getRemainingDaysInCurrentMonth").then((remainingdays)=>{
+					client.publish("budget", "Balance", "calculate",{remainingdays});
+					client.subscribe("budget", "Balance", "calculate").then((results)=>{
+						document.getElementById("daily").innerText = `Daily Expenditure: ${(Math.round(results.dailyexpenditure * 100) / 100)}`;
+						document.getElementById("balance").value = remainingBalance;
+					});
 				});
 			});
 			
