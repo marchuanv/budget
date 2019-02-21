@@ -7,8 +7,8 @@
 	<body>
 		<script type="text/javascript">
 			
-			const balance = new RemoteObject("budget", "Balance");
-			const utils = new RemoteObject("utils-api", "Utils");
+			const balance = getRemoteInstance("budget", "Balance");
+			const utils = getRemoteInstance("utils-api", "Utils");
 
 			const remainingbalance = balance.getBalance();
 			const remainingdays = utils.getRemainingDaysInCurrentMonth();
