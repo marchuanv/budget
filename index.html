@@ -1,35 +1,26 @@
 <html>
 	<head>
 		<link rel="stylesheet"  type="text/css" href="styles.css">
-		<script type="text/javascript" src="client.js"></script>
+		<script type="text/javascript" src="remoteobject.js"></script>
 		<title>Budget</title>
 	</head>
 	<body>
 		<script type="text/javascript">
 			
-			const client = new Client("budgetclient");
-			
-			async function initialise(){
-				client.publish("budget", "Balance", "getBalance");
-				client.publish("utils-api", "Utils", "getRemainingDaysInCurrentMonth");
-				
-				const remainingbalance = await client.subscribe("budget", "Balance", "getBalance");
-				const remainingdays = await client.subscribe("utils-api", "Utils", "getRemainingDaysInCurrentMonth");
+			const balance = new RemoteObject("budget", "Balance");
+			const utils = new RemoteObject("utils-api", "Utils");
 
-				client.publish("budget", "Balance", "calculate",{remainingdays});
-				
-				const results = await client.subscribe("budget", "Balance", "calculate");
-				
-				document.getElementById("daily").innerText = `Daily Expenditure: ${(Math.round(results.dailyexpenditure * 100) / 100)}`;
-				document.getElementById("balance").value = remainingbalance;
-			}
+			const remainingbalance = balance.getBalance();
+			const remainingdays = utils.getRemainingDaysInCurrentMonth();
+			const results = balance.calculate(remainingdays);
+			
+			document.getElementById("daily").innerText = `Daily Expenditure: ${(Math.round(results.dailyexpenditure * 100) / 100)}`;
+			document.getElementById("balance").value = remainingbalance;
 
 			function newBalance(){
-				const balance=parseFloat(document.getElementById("balance").value);
-				client.publish("budget", "Balance", "setBalance", {balance});
+				const _newBalance=parseFloat(document.getElementById("balance").value);
+				balance.setBalance(balance);
 			};
-			
-			initialise();
 
 		</script>
 		<p>Total Balance: <input type="text" id="balance" placeholder="enter total balance here..." value="" onchange="newBalance()"/></p>
