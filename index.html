@@ -11,7 +11,7 @@
 				const balance = await getRemoteInstance("budget", "Balance");
 				const utils = await getRemoteInstance("utils-api", "Utils");
 
-				const remainingbalance = await balance.balance;
+				const remainingbalance = await balance.getBalance();
 				const remainingdays = await utils.getRemainingDaysInCurrentMonth();
 				const results = await balance.calculate(remainingdays);
 				
