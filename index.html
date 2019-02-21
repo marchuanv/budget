@@ -7,21 +7,23 @@
 	<body>
 		<script type="text/javascript">
 			
-			const balance = getRemoteInstance("budget", "Balance");
-			const utils = getRemoteInstance("utils-api", "Utils");
+			async function initialise(){
+				const balance = await getRemoteInstance("budget", "Balance");
+				const utils = await getRemoteInstance("utils-api", "Utils");
 
-			const remainingbalance = balance.getBalance();
-			const remainingdays = utils.getRemainingDaysInCurrentMonth();
-			const results = balance.calculate(remainingdays);
-			
-			document.getElementById("daily").innerText = `Daily Expenditure: ${(Math.round(results.dailyexpenditure * 100) / 100)}`;
-			document.getElementById("balance").value = remainingbalance;
+				const remainingbalance = await balance.getBalance();
+				const remainingdays = await utils.getRemainingDaysInCurrentMonth();
+				const results = await balance.calculate(remainingdays);
+				
+				document.getElementById("daily").innerText = `Daily Expenditure: ${(Math.round(results.dailyexpenditure * 100) / 100)}`;
+				document.getElementById("balance").value = remainingbalance;
+			}
 
 			function newBalance(){
 				const _newBalance=parseFloat(document.getElementById("balance").value);
 				balance.setBalance(balance);
 			};
-
+			initialise();
 		</script>
 		<p>Total Balance: <input type="text" id="balance" placeholder="enter total balance here..." value="" onchange="newBalance()"/></p>
 		<p id="daily">Daily Expenditure: 0</p>
