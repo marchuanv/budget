@@ -13,9 +13,10 @@
 
 				const remainingbalance = await balance.getBalance();
 				const remainingdays = await utils.getRemainingDaysInCurrentMonth();
-				const results = await balance.calculate(remainingdays);
+				await balance.setRemainingDays(remainingdays);
+				const dailyexpenditure = await balance.getDailyExpenditure();
 				
-				document.getElementById("daily").innerText = `Daily Expenditure: ${(Math.round(results.dailyexpenditure * 100) / 100)}`;
+				document.getElementById("daily").innerText = `Daily Expenditure: ${(Math.round(dailyexpenditure * 100) / 100)}`;
 				document.getElementById("balance").value = remainingbalance;
 			}
 
