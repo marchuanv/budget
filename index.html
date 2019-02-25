@@ -8,13 +8,13 @@
 		<script type="text/javascript">
 			
 			async function initialise(){
-				const balance = await getRemoteInstance("budget", "Balance");
+				const balanceRemote = await getRemoteInstance("budget", "Balance");
 				const utils = await getRemoteInstance("utils-api", "Utils");
 
-				const remainingbalance = await balance.getBalance();
+				const remainingbalance = await balanceRemote.getBalance();
 				const remainingdays = await utils.getRemainingDaysInCurrentMonth();
-				await balance.setRemainingDays(remainingdays);
-				const dailyexpenditure = await balance.getDailyExpenditure();
+				await balanceRemote.setRemainingDays(remainingdays);
+				const dailyexpenditure = await balanceRemote.getDailyExpenditure();
 				
 				document.getElementById("daily").innerText = `Daily Expenditure: ${(Math.round(dailyexpenditure * 100) / 100)}`;
 				document.getElementById("balance").value = remainingbalance;
@@ -22,7 +22,7 @@
 
 			function newBalance(){
 				const _newBalance=parseFloat(document.getElementById("balance").value);
-				balance.setBalance(_newBalance);
+				balanceRemote.setBalance(_newBalance);
 			};
 			initialise();
 		</script>
