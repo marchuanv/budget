@@ -12,8 +12,8 @@
 				balanceRemote.setBalance(_newBalance);
 			};
 			
-			getRemoteInstance("budget", "Balance").then((balanceRemote)=>{
-				getRemoteInstance("utils-api", "Utils").then((utils)=>{
+			getRemoteInstance("budget", "Balance").then(async(balanceRemote)=>{
+				getRemoteInstance("utils-api", "Utils").then(async(utils)=>{
 					const remainingbalance = await balanceRemote.getBalance();
 					const remainingdays = await utils.getRemainingDaysInCurrentMonth();
 					await balanceRemote.setRemainingDays(remainingdays);
