@@ -6,12 +6,6 @@
 	</head>
 	<body>
 		<script type="text/javascript">
-
-			function newBalance(){
-				const _newBalance=parseFloat(document.getElementById("balance").value);
-				balanceRemote.setBalance(_newBalance);
-			};
-			
 			getRemoteInstance("budget", "Balance").then(async(balanceRemote)=>{
 				getRemoteInstance("utils-api", "Utils").then(async(utils)=>{
 					const remainingbalance = await balanceRemote.getBalance();
@@ -20,11 +14,14 @@
 					const dailyexpenditure = await balanceRemote.getDailyExpenditure();
 					document.getElementById("daily").innerText = `Daily Expenditure: ${(Math.round(dailyexpenditure * 100) / 100)}`;
 					document.getElementById("balance").value = remainingbalance;
+					window.setBalance = () => {
+						const _newBalance=parseFloat(document.getElementById("balance").value);
+						balanceRemote.setBalance(_newBalance);
+					};
 				});
 			});
-
 		</script>
-		<p>Total Balance: <input type="text" id="balance" placeholder="enter total balance here..." value="" onchange="newBalance()"/></p>
+		<p>Total Balance: <input type="text" id="balance" placeholder="enter total balance here..." value="" onchange="setBalance()"/></p>
 		<p id="daily">Daily Expenditure: 0</p>
 	</body>
 </html>
