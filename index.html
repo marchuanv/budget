@@ -27,6 +27,7 @@
 					window.setBalance = () => {
 						const _newBalance=parseFloat(document.getElementById("balance").value);
 						balanceRemote.reset(_newBalance);
+						location.reload();
 					};
 				});
 			});
