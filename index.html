@@ -27,7 +27,7 @@
 					document.getElementById("balanceform").style.display = "block";
 					document.getElementById("loader").style.display = "none";
 
-					window.setBalance = () => {
+					window.setBalance = async () => {
 						const remainingdays = await utils.getRemainingDaysInCurrentMonth();
 						const newBalance=parseFloat(document.getElementById("balance").value);
 						const month=document.getElementById("month").value;
