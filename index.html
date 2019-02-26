@@ -11,7 +11,7 @@
 			<p>Month: <input type="month" id="month"></p>
 			<p>Total Balance: <input type="text" id="balance" placeholder="enter total balance here..." value="" /></p>
 			<p id="daily">Daily Expenditure: 0</p>
-			<input type="button" id="submit" onchange="setBalance()">
+			<input type="button" id="submit" value="Submit" onclick="setBalance()">
 		</div>
 
 		<script type="text/javascript">
@@ -33,7 +33,7 @@
 						const newBalance=parseFloat(document.getElementById("balance").value);
 						const month=document.getElementById("month").value;
 
-						balanceRemote.reset(remainingdays, newBalance);
+						balanceRemote.reset(remainingdays, newBalance, month);
 						location.reload();
 					};
 				});
