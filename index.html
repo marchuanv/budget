@@ -31,7 +31,8 @@
 					window.setBalance = async () => {
 						const remainingdays = await utils.getRemainingDaysInCurrentMonth();
 						const newBalance=parseFloat(document.getElementById("balance").value);
-						const month=document.getElementById("month").value;
+						const date=document.getElementById("month").value.split("-");
+						const month = Number(date[1]);
 
 						balanceRemote.reset(remainingdays, newBalance, month);
 						location.reload();
