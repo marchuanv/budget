@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Balance Tests</title>
+	<script type="text/javascript" src="../lib/balance.js"></script>
+</head>
+<body>
+	<script>
+		const balance = new Balance();
+
+		console.log("");
+		console.log("RESET");
+		balance.reset(32,6000,2019,03);
+		console.log(JSON.parse(JSON.stringify(balance)));
+		
+		console.log("");
+		console.log("FIRST getDailyExpenditure");
+		console.log(balance.getDailyExpenditure());
+		console.log(JSON.parse(JSON.stringify(balance)));
+
+		console.log("");
+		console.log("changed balanced reduce day");
+		const yesterday = new Date();
+		yesterday.setDate(yesterday.getDate()-1);
+		balance.yesterday = yesterday;
+		
+		console.log("");
+		console.log("SECOND getDailyExpenditure");
+		console.log(balance.getDailyExpenditure());
+		console.log(JSON.parse(JSON.stringify(balance)));
+
+		console.log("");
+		console.log("THIRD getDailyExpenditure");
+		console.log(balance.getDailyExpenditure());
+		console.log(JSON.parse(JSON.stringify(balance)));
+	</script>
+</body>
+</html>
