@@ -28,7 +28,7 @@
 					const month = await balanceRemote.getMonth();
 					const year = await balanceRemote.getYear();
 
-					document.getElementById("month").value = `${year}-${month}-01`;
+					document.getElementById("month").value = `${year}-${month}`;
 
 					document.getElementById("balanceform").style.display = "block";
 					document.getElementById("loader").style.display = "none";
