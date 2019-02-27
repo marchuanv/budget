@@ -25,16 +25,17 @@
 					const remainingbalance = await balanceRemote.getBalance();
 					document.getElementById("balance").value = remainingbalance;
 
+					const monthYear = await balanceRemote.getDate();
+					document.getElementById("month").value = monthYear;
+
 					document.getElementById("balanceform").style.display = "block";
 					document.getElementById("loader").style.display = "none";
 
 					window.setBalance = async () => {
 						const remainingdays = await utils.getRemainingDaysInCurrentMonth();
 						const newBalance=parseFloat(document.getElementById("balance").value);
-						const date=document.getElementById("month").value.split("-");
-						const month = Number(date[1]);
-
-						await balanceRemote.reset(remainingdays, newBalance, month);
+						const monthYear=document.getElementById("month").value.split("-");
+						await balanceRemote.reset(remainingdays, newBalance, monthYear[1], monthYear[0]);
 						location.reload();
 					};
 				});
