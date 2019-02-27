@@ -25,8 +25,10 @@
 					const remainingbalance = await balanceRemote.getBalance();
 					document.getElementById("balance").value = remainingbalance;
 
-					const monthYear = await balanceRemote.getDate();
-					document.getElementById("month").value = monthYear;
+					const month = await balanceRemote.getMonth();
+					const year = await balanceRemote.getYear();
+
+					document.getElementById("month").value = month;
 
 					document.getElementById("balanceform").style.display = "block";
 					document.getElementById("loader").style.display = "none";
