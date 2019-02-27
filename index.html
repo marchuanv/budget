@@ -34,7 +34,7 @@
 						const date=document.getElementById("month").value.split("-");
 						const month = Number(date[1]);
 
-						balanceRemote.reset(remainingdays, newBalance, month);
+						await balanceRemote.reset(remainingdays, newBalance, month);
 						location.reload();
 					};
 				});
