@@ -34,7 +34,7 @@
 					document.getElementById("loader").style.display = "none";
 
 					window.setBalance = async () => {
-						const remainingdays = await utils.getRemainingDaysForMonth(month);
+						const remainingdays = await utils.getRemainingDays(year, month);
 						const newBalance=parseFloat(document.getElementById("balance").value);
 						const monthYear=document.getElementById("month").value.split("-");
 						await balanceRemote.reset(remainingdays, newBalance, monthYear[1], monthYear[0]);
