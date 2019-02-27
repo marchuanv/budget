@@ -37,7 +37,7 @@
 						const monthYear=document.getElementById("month").value.split("-");
 						const remainingdays = await utils.getRemainingDays(monthYear[1]);
 						const newBalance=parseFloat(document.getElementById("balance").value);
-						await balanceRemote.reset(remainingdays, newBalance, monthYear[1], monthYear[0]);
+						await balanceRemote.reset(remainingdays, newBalance, monthYear[0], monthYear[1]);
 						location.reload();
 					};
 				});
