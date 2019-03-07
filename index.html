@@ -15,33 +15,37 @@
 		</div>
 
 		<script type="text/javascript">
-			document.getElementById("balanceform").style.display = "none";
-			getRemoteInstance("budget", "Balance").then(async(balanceRemote) => {
-				getRemoteInstance("utils-api", "Utils").then(async(utils) => {
-					
-					const dailyexpenditure = await balanceRemote.getDailyExpenditure();
-					document.getElementById("daily").innerText = `Daily Expenditure: ${(Math.round(dailyexpenditure * 100) / 100)}`;
-					
-					const remainingbalance = await balanceRemote.getBalance();
-					document.getElementById("balance").value = remainingbalance;
 
-					const month = await balanceRemote.getMonth();
-					const year = await balanceRemote.getYear();
+			(async function(){
+				document.getElementById("balanceform").style.display = "none";
 
-					document.getElementById("month").value = `${year}-${('0' + month).slice(-2)}`;
+				const budget = getRemoteInstance("budget", "Budget");
+				const balanceRemote = getRemoteInstance("budget", "Balance");
+				const utils = getRemoteInstance("utils-api", "Utils");
+				
+				const dailyexpenditure = await balanceRemote.getDailyExpenditure();
+				document.getElementById("daily").innerText = `Daily Expenditure: ${(Math.round(dailyexpenditure * 100) / 100)}`;
+				
+				const remainingbalance = await balanceRemote.getBalance();
+				document.getElementById("balance").value = remainingbalance;
 
-					document.getElementById("balanceform").style.display = "block";
-					document.getElementById("loader").style.display = "none";
+				const month = await balanceRemote.getMonth();
+				const year = await balanceRemote.getYear();
 
-					window.setBalance = async () => {
-						const monthYear=document.getElementById("month").value.split("-");
-						const remainingdays = await utils.getRemainingDays(monthYear[1]);
-						const newBalance=parseFloat(document.getElementById("balance").value);
-						await balanceRemote.reset(remainingdays, newBalance, monthYear[0], monthYear[1]);
-						location.reload();
-					};
-				});
-			});
+				document.getElementById("month").value = `${year}-${('0' + month).slice(-2)}`;
+
+				document.getElementById("balanceform").style.display = "block";
+				document.getElementById("loader").style.display = "none";
+
+				window.setBalance = async () => {
+					const monthYear=document.getElementById("month").value.split("-");
+					const remainingdays = await utils.getRemainingDays(monthYear[1]);
+					const newBalance=parseFloat(document.getElementById("balance").value);
+					await balanceRemote.reset(remainingdays, newBalance, monthYear[0], monthYear[1]);
+					location.reload();
+				};
+			})();
+
 		</script>
 		
 	</body>
