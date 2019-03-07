@@ -3,9 +3,23 @@
 <head>
 	<title>Balance Tests</title>
 	<script type="text/javascript" src="../lib/balance.js"></script>
+	<script type="text/javascript" src="../lib/budget.js"></script>
 </head>
 <body>
 	<script>
+
+		const budget = new Budget();
+
+		console.log("allowance: ",budget.getAllowance());
+		budget.reset(21000);
+
+		console.log("allowance: ",budget.getAllowance());
+		budget.addExpense("Kung-Fu",400);
+		budget.addExpense("Internet",1100);
+		budget.addExpense("rent",6500);
+
+		console.log("allowance: ",budget.getAllowance());
+
 		const balance = new Balance();
 
 		console.log("");
