@@ -19,9 +19,9 @@
 			(async function(){
 				document.getElementById("balanceform").style.display = "none";
 
-				const budget = getRemoteInstance("budget", "Budget");
-				const balanceRemote = getRemoteInstance("budget", "Balance");
-				const utils = getRemoteInstance("utils-api", "Utils");
+				const budget = await getRemoteInstance("budget", "Budget");
+				const balanceRemote = await getRemoteInstance("budget", "Balance");
+				const utils = await getRemoteInstance("utils-api", "Utils");
 				
 				const dailyexpenditure = await balanceRemote.getDailyExpenditure();
 				document.getElementById("daily").innerText = `Daily Expenditure: ${(Math.round(dailyexpenditure * 100) / 100)}`;
