@@ -49,7 +49,9 @@
 				const budgetDate = await budget.getDate();
 
 				if (budgetDate){
-					document.getElementById("month").value = `${budgetDate.getFullYear()}-${('0' + budgetDate.getMonth()+1).slice(-2)}`;
+					const year = budgetDate.getFullYear();
+					const month = budgetDate.getMonth()+1;
+					document.getElementById("month").value = `${}-${('0' + month).slice(-2)}`;
 				}
 
 				document.getElementById("budgetform").style.display = "block";
