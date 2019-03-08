@@ -37,16 +37,8 @@
 				const balance = await getRemoteInstance("budget", "Balance");
 				const utils = await getRemoteInstance("utils-api", "Utils");
 
-
 				const allowance = await budget.getAllowance();
 				document.getElementById("balance").value = allowance;
-
-				if (allowance){
-					const monthYear=document.getElementById("month").value;
-					const monthYearArray=monthYear.split("-");
-					const remainingdays = await utils.getRemainingDays(monthYearArray[1]);
-					await balance.reset(remainingdays, allowance);
-				}
 
 				const dailyAllowance = await balance.getDailyAllowance();
 				document.getElementById("dailyallowance").value = Math.round(dailyAllowance * 100) / 100;
@@ -69,16 +61,17 @@
 					const newExpense = document.createElement("div");
 					newExpense.innerText = `${expenseNameElement.value}: R ${expenseValueElement.value}`;
 					expenses.appendChild(newExpense);
+					await budget.addExpense(expenseNameElement.value, expenseValueElement.value);	
 					expenseNameElement.value = null;
 					expenseValueElement.value = null;
 				}
 
 				window.submit = async () => {
-					const expenseName = document.getElementById("expensename").value;
-					const expenseValue = document.getElementById("expensevalue").value;
-					if (expenseName && expensevalue){
-						await budget.addExpense(expenseName,expenseValue);	
-					}
+					const monthYear=document.getElementById("month").value;
+					const monthYearArray=monthYear.split("-");
+					const remainingdays = await utils.getRemainingDays(monthYearArray[1]);
+					const allowance = await budget.getAllowance();
+					await balance.reset(remainingdays, allowance);
 					location.reload();
 				};
 
