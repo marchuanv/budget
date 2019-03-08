@@ -69,8 +69,8 @@
 					const newExpense = document.createElement("div");
 					newExpense.innerText = `Name: "${expenseNameElement.value}", Amount: R "${expenseValueElement.value}"`;
 					expenses.appendChild(newExpense);
-					expenseNameElement.value = "";
-					expenseValueElement.value = 0;
+					expenseNameElement.value = null;
+					expenseValueElement.value = null;
 				}
 
 				window.submit = async () => {
