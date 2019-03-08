@@ -34,13 +34,14 @@
 
 
 				const allowance = await budget.getAllowance();
-
 				document.getElementById("balance").value = allowance;
 
-				const monthYear=document.getElementById("month").value;
-				const monthYearArray=monthYear.split("-");
-				const remainingdays = await utils.getRemainingDays(monthYearArray[1]);
-				await balance.reset(remainingdays, allowance);
+				if (allowance){
+					const monthYear=document.getElementById("month").value;
+					const monthYearArray=monthYear.split("-");
+					const remainingdays = await utils.getRemainingDays(monthYearArray[1]);
+					await balance.reset(remainingdays, allowance);
+				}
 
 				const dailyAllowance = await balance.getDailyAllowance();
 				document.getElementById("allowance").value = Math.round(dailyAllowance * 100) / 100;
