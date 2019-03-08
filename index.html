@@ -10,7 +10,8 @@
 		<fieldset id="budgetform">
 			<legend>Budget:</legend>
 			Month: <input type="month" id="month"/>
-			Balance: <input type="text" id="balance" value="" readonly/><br>
+			Balance: <input type="text" id="balance" value="" readonly/>
+			Income: <input type="text" id="income" value="" readonly/>
 			<fieldset>
 				<legend>New Expense:</legend>
 				<input type="text" id="expensename" placeholder="expense name..." /><br>
@@ -61,12 +62,22 @@
 					const newExpense = document.createElement("div");
 					newExpense.innerText = `${expenseNameElement.value}: R ${expenseValueElement.value}`;
 					expenses.appendChild(newExpense);
-					await budget.addExpense(expenseNameElement.value, expenseValueElement.value);	
 					expenseNameElement.value = null;
 					expenseValueElement.value = null;
 				}
 
 				window.submit = async () => {
+
+					const incomeElement = document.getElementById("income");
+					budget.reset(incomeElement.value);
+
+					const expenses = document.getElementById("allexpenses");
+					for(const expenseEle of expenses.children){
+						console.log(expenseEle);
+					};
+
+					await budget.addExpense(expenseNameElement.value, expenseValueElement.value);	
+
 					const monthYear=document.getElementById("month").value;
 					const monthYearArray=monthYear.split("-");
 					const remainingdays = await utils.getRemainingDays(monthYearArray[1]);
