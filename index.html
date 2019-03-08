@@ -64,15 +64,11 @@
 
 				window.addExpense = () => {
 					const expenses = document.getElementById("allexpenses");
-					
-					const expenseName = document.getElementById("expensename").value;
-					const expenseValue = parseFloat(document.getElementById("expensevalue").value);
-
+					const expenseNameElement = document.getElementById("expensename");
+					const expenseValueElement = document.getElementById("expensevalue");
 					const newExpense = document.createElement("div");
-					newExpense.innerText = `Name: "${expenseName}", Amount: R "${expenseValue}"`;
-
+					newExpense.innerText = `Name: "${expenseNameElement.value}", Amount: R "${expenseValueElement.value}"`;
 					expenses.appendChild(newExpense);
-
 				}
 
 				window.submit = async () => {
