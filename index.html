@@ -67,7 +67,7 @@
 					const expenseNameElement = document.getElementById("expensename");
 					const expenseValueElement = document.getElementById("expensevalue");
 					const newExpense = document.createElement("div");
-					newExpense.innerText = `Name: "${expenseNameElement.value}", Amount: R "${expenseValueElement.value}"`;
+					newExpense.innerText = `${expenseNameElement.value}: R ${expenseValueElement.value}`;
 					expenses.appendChild(newExpense);
 					expenseNameElement.value = null;
 					expenseValueElement.value = null;
