@@ -15,13 +15,14 @@
 				<legend>Expenses:</legend>
 				<input type="text" id="expensename" placeholder="expense name..." /><br>
 				<input type="number" id="expensevalue" min="0.01" step="0.01" value="00.00" /><br>
-				<input type="button" id="addexpense" value="Add Expense" onclick="addExpense()"/>
 			</fieldset>
 			<fieldset>
 				<legend>Daily Allowance:</legend>
 				<input type="number" value="00.00" id="dailyallowance" />
 			</fieldset>
+			<input type="button" id="submit" value="Submit" onclick="submit()"/>
 		</fieldset>
+
 
 
 		<script type="text/javascript">
@@ -57,7 +58,7 @@
 				document.getElementById("budgetform").style.display = "block";
 				document.getElementById("loader").style.display = "none";
 
-				window.addExpense = async () => {
+				window.submit = async () => {
 					const expenseName = document.getElementById("expensename").value;
 					const expenseValue = document.getElementById("expensevalue").value;
 					await budget.addExpense(expenseName,expenseValue);
