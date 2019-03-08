@@ -46,7 +46,7 @@
 				const dailyAllowance = await balance.getDailyAllowance();
 				document.getElementById("dailyallowance").value = Math.round(dailyAllowance * 100) / 100;
 				
-				const budgetDate = budget.getDate();
+				const budgetDate = await budget.getDate();
 
 				document.getElementById("month").value = `${year.getFullYear()}-${('0' + budgetDate.getMonth()+1).slice(-2)}`;
 
