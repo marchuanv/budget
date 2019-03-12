@@ -79,9 +79,11 @@
 											.map(x=>x.innerText);
 					for (const expense of expenses) {
 						const split = expense.split(":");
-						const name = split[0];
-						const amount = split[1];
-						await budget.addExpense(name, amount);	
+						if (split[0] && split[1]){
+							const name = split[0];
+							const amount = split[1];
+							await budget.addExpense(name, amount);	
+						}
 					};
 
 					const monthYear=document.getElementById("month").value;
