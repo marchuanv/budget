@@ -71,20 +71,21 @@
 				}
 
 				window.submit = async () => {
+					const expenses = [];
+					for (const expenseEle of document.getElementById("allexpenses").children) {
+						const split = expenseEle.innerText.split(":");
+						if (split[0] && split[1] && expenseEle.className === "expense"){
+							const name = split[0];
+							const amountStr = split[1].replace("R","");
+							expenses.push({name, amount: parseFloat(amountStr)});
+						}
+					};
+					for(const expense of expenses){
+						await budget.addExpense(expense.name, expense.amount);	
+					};
 
 					const incomeElement = document.getElementById("income");
 					budget.reset(incomeElement.value);
-					const expenses = document.getElementById("allexpenses")
-											.children.filter(x=>x.className === "expense")
-											.map(x=>x.innerText);
-					for (const expense of expenses) {
-						const split = expense.split(":");
-						if (split[0] && split[1]){
-							const name = split[0];
-							const amount = split[1];
-							await budget.addExpense(name, amount);	
-						}
-					};
 
 					const monthYear=document.getElementById("month").value;
 					const monthYearArray=monthYear.split("-");
