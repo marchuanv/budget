@@ -41,6 +41,9 @@
 				const allowance = await budget.getAllowance();
 				document.getElementById("balance").value = allowance;
 
+				const income = await budget.getIncome();
+				document.getElementById("income").value = income;
+
 				const dailyAllowance = await balance.getDailyAllowance();
 				document.getElementById("dailyallowance").value = Math.round(dailyAllowance * 100) / 100;
 				
