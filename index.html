@@ -63,6 +63,7 @@
 					const expenseNameElement = document.getElementById("expensename");
 					const expenseValueElement = document.getElementById("expensevalue");
 					const newExpense = document.createElement("div");
+					newExpense.setAttribute("class", "expense");
 					newExpense.innerText = `${expenseNameElement.value}: R ${expenseValueElement.value}`;
 					expenses.appendChild(newExpense);
 					expenseNameElement.value = null;
@@ -73,13 +74,15 @@
 
 					const incomeElement = document.getElementById("income");
 					budget.reset(incomeElement.value);
-
-					const expenses = document.getElementById("allexpenses");
-					for(const expenseEle of expenses.children){
-						console.log(expenseEle);
+					const expenses = document.getElementById("allexpenses")
+											.children.filter(x=>x.className === "expense")
+											.map(x=>x.innerText);
+					for (const expense of expenses) {
+						const split = expense.split(":");
+						const name = split[0];
+						const amount = split[1];
+						await budget.addExpense(name, amount);	
 					};
-
-					await budget.addExpense(expenseNameElement.value, expenseValueElement.value);	
 
 					const monthYear=document.getElementById("month").value;
 					const monthYearArray=monthYear.split("-");
