@@ -29,6 +29,14 @@
 		</fieldset>
 		<script type="text/javascript">
 			(async function(){
+				const utils = new Utils({setTimeout, setInterval, clearInterval, console});
+				const communication = new Communication({
+					websocket: WebSocket, 
+					utils,
+					http: null,
+					isNodeJsContext: false, 
+					isClient: true
+				});
 				await communication.registerSocketEndpoint("localhost", "3000", "application/json","/getfunctionsdetail")
 					.send({fileSpec: "budget.js", className: "Budget"});	
 			})();
