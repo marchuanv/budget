@@ -37,7 +37,7 @@
 					isNodeJsContext: false, 
 					isClient: true
 				});
-				await communication.registerSocketEndpoint("localhost", "3000", "application/json","/getfunctionsdetail")
+				communication.registerSocketEndpoint("localhost", "3000", "application/json","/getfunctionsdetail")
 					.send({fileSpec: "budget.js", className: "Budget"});	
 			})();
 		</script>
