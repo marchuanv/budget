@@ -30,7 +30,7 @@
 		<script type="text/javascript">
 			(async function(){
 				await communication.registerSocketEndpoint("localhost", "3000", "application/json","/getfunctionsdetail")
-					.send({"budget.js", "Budget"});	
+					.send({fileSpec: "budget.js", className: "Budget"});	
 			})();
 		</script>
 	</body>
