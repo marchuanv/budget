@@ -6,7 +6,6 @@
 		<title>Budget</title>
 	</head>
 	<body>
-		
 		<div class="loader" id="loader"></div>
 		<fieldset id="budgetform">
 			<legend>Budget:</legend>
@@ -28,77 +27,11 @@
 				<legend>All Expenses:</legend>
 			</fieldset>
 		</fieldset>
-
-
-
 		<script type="text/javascript">
-
 			(async function(){
-
-				const budget = await getRemoteInstance("budget", "Budget");
-				const balance = await getRemoteInstance("budget", "Balance");
-				const utils = await getRemoteInstance("utils-api", "Utils");
-
-				const allowance = await budget.getAllowance();
-				document.getElementById("balance").value = allowance;
-
-				const income = await budget.getIncome();
-				document.getElementById("income").value = income;
-
-				const dailyAllowance = await balance.getDailyAllowance();
-				document.getElementById("dailyallowance").value = Math.round(dailyAllowance * 100) / 100;
-				
-				const budgetDate = await budget.getDate();
-
-				if (budgetDate){
-					const year = budgetDate.getFullYear();
-					const month = budgetDate.getMonth()+1;
-					document.getElementById("month").value = `${year}-${('0' + month).slice(-2)}`;
-				}
-
-				document.getElementById("budgetform").style.display = "block";
-				document.getElementById("loader").style.display = "none";
-
-				window.addExpense = () => {
-					const expenses = document.getElementById("allexpenses");
-					const expenseNameElement = document.getElementById("expensename");
-					const expenseValueElement = document.getElementById("expensevalue");
-					const newExpense = document.createElement("div");
-					newExpense.setAttribute("class", "expense");
-					newExpense.innerText = `${expenseNameElement.value}: R ${expenseValueElement.value}`;
-					expenses.appendChild(newExpense);
-					expenseNameElement.value = null;
-					expenseValueElement.value = null;
-				}
-
-				window.submit = async () => {
-					const expenses = [];
-					for (const expenseEle of document.getElementById("allexpenses").children) {
-						const split = expenseEle.innerText.split(":");
-						if (split[0] && split[1] && expenseEle.className === "expense"){
-							const name = split[0];
-							const amountStr = split[1].replace("R","");
-							expenses.push({name, amount: parseFloat(amountStr)});
-						}
-					};
-					for(const expense of expenses){
-						await budget.addExpense(expense.name, expense.amount);	
-					};
-
-					const incomeElement = document.getElementById("income");
-					budget.reset(incomeElement.value);
-
-					const monthYear=document.getElementById("month").value;
-					const monthYearArray=monthYear.split("-");
-					const remainingdays = await utils.getRemainingDays(monthYearArray[1]);
-					const allowance = await budget.getAllowance();
-					await balance.reset(remainingdays, allowance);
-					location.reload();
-				};
-
+				await communication.registerSocketEndpoint("localhost", "3000", "application/json","/getfunctionsdetail")
+					.send({"budget.js", "Budget"});	
 			})();
-
 		</script>
-		
 	</body>
 </html>
