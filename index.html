@@ -38,7 +38,9 @@
 					isClient: true
 				});
 				communication.registerSocketEndpoint("localhost", "3000", "application/json","/getfunctionsdetail")
-					.send({fileSpec: "lib/budget.js", className: "Budget"});	
+					.send({fileSpec: "lib/budget.js", className: "Budget"}).receive((functionsDetail)=>{
+						console.log("Functions Detail: ",functionsDetail);
+					});	
 			})();
 		</script>
 	</body>
