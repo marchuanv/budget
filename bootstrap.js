@@ -1,5 +1,5 @@
-function Bootstrap(references){
-	this.create=function(){
-		return new Budget(references);
+function Bootstrap(){
+	this.create=function(args){
+		return new Budget(args);
 	}
 }
