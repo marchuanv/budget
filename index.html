@@ -29,7 +29,7 @@
 		<script type="text/javascript">
 			
 			const factory = new Factory();
-			const communication = factory.create({
+			const communication = await factory.create({
 				websocket: WebSocket, 
 				utils,
 				http: null,
