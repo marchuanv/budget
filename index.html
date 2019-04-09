@@ -1,7 +1,7 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="styles.css">
-		<script src="communication.js"></script>
+		<script src="factory.js"></script>
 		<title>Budget</title>
 	</head>
 	<body>
@@ -28,7 +28,8 @@
 		</fieldset>
 		<script type="text/javascript">
 			
-			const communication = new Communication({
+			const factory = new Factory();
+			const communication = factory.create({
 				websocket: WebSocket, 
 				utils,
 				http: null,
@@ -42,11 +43,11 @@
 				console
 			});
 
-			const utils = communication.registerSocketEndpoint("application/json","/script")
-							.send({ moduleName: "utils", fileSpec: "lib/utils.js" })
-							.receive((script)=>{
-									console	.log("script: ",script	);
-							});
+			// const utils = communication.registerSocketEndpoint("application/json","/script")
+			// 				.send({ moduleName: "utils", fileSpec: "lib/utils.js" })
+			// 				.receive((script)=>{
+			// 						console	.log("script: ",script	);
+			// 				});
 
 
 			// const utils = new Utils({setTimeout, setInterval, clearInterval, console});
