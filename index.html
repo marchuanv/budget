@@ -27,21 +27,22 @@
 			</fieldset>
 		</fieldset>
 		<script type="text/javascript">
-			
-			const factory = new Factory();
-			const communication = await factory.create({
-				websocket: WebSocket, 
-				utils,
-				http: null,
-				isNodeJsContext: false, 
-				isClient: true,
-				host: "localhost",
-				port: "3000",
-				setTimeout, 
-				setInterval, 
-				clearInterval, 
-				console
-			});
+			(async()=>{
+				const factory = new Factory();
+				const communication = await factory.create({
+					websocket: WebSocket, 
+					utils,
+					http: null,
+					isNodeJsContext: false, 
+					isClient: true,
+					host: "localhost",
+					port: "3000",
+					setTimeout, 
+					setInterval, 
+					clearInterval, 
+					console
+				});
+			})();
 
 			// const utils = communication.registerSocketEndpoint("application/json","/script")
 			// 				.send({ moduleName: "utils", fileSpec: "lib/utils.js" })
