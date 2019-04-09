@@ -16,7 +16,8 @@
     "url": "git+ssh://git@github.com/marchuanv/budget.git"
   },
   "remotemodules": [
-	"utils-api"
+    "communication-api",
+	  "utils-api"
   ],
   "author": "Marchuan Van Der Merwe",
   "license": "ISC",
