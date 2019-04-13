@@ -28,7 +28,7 @@
 		</fieldset>
 		<script type="text/javascript">
 			(async()=>{
-				const client = new WebSocketClient( {websocket: null, Buffer, console} );
+				const client = new WebSocketClient();
 				client.connect("ws://localhost:3000/callfunction","application/json");
 			})();
 
