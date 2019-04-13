@@ -29,7 +29,7 @@
 		<script type="text/javascript">
 			(async()=>{
 				const client = new WebSocketClient();
-				client.connect("ws://localhost:3000/callfunction","application/json");
+				await client.connect("ws://localhost:3000/callfunction","application/json");
 			})();
 
 			// const utils = communication.registerSocketEndpoint("application/json","/script")
