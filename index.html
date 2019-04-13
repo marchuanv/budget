@@ -27,10 +27,10 @@
 			</fieldset>
 		</fieldset>
 		<script type="text/javascript">
-			// (async()=>{
-			// 	const factory = new Factory();
-			// 	const budget   = await factory.create("localhost",3000);
-			// })();
+			(async()=>{
+				const client = new WebSocketClient();
+				client.connect("ws://localhost:3000/callfunction","application/json");
+			})();
 
 			// const utils = communication.registerSocketEndpoint("application/json","/script")
 			// 				.send({ moduleName: "utils", fileSpec: "lib/utils.js" })
