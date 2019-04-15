@@ -31,7 +31,8 @@
 			
 			client.connect("ws://localhost:3000/callfunction","application/json").receive((data)=>{
 				document.getElementById("income").value = data.results;
-			}).send({ 
+			}).send({
+				moduleName: "budget",
 				fileSpec: "lib/budget.js", 
 				className: "Budget", 
 				functionName:"getIncome", 
@@ -41,6 +42,7 @@
 			client.connect("ws://localhost:3000/callfunction","application/json").receive((data)=>{
 				document.getElementById("dailyallowance").value = data.results;
 			}).send({ 
+				moduleName: "budget",
 				fileSpec: "lib/budget.js", 
 				className: "Budget", 
 				functionName:"getAllowance", 
@@ -49,6 +51,7 @@
 			client.connect("ws://localhost:3000/callfunction","application/json").receive((data)=>{
 				document.getElementById("month").value = data.results;
 			}).send({ 
+				moduleName: "utils-api",
 				fileSpec: "lib/utils.js", 
 				className: "Utils", 
 				functionName:"getCurrentMonth", 
