@@ -27,9 +27,10 @@
 			</fieldset>
 		</fieldset>
 		<script type="text/javascript">
+		(async()=>{
 			const client = new WebSocketClient({websocket:null,Actions});
-			
-			client.connect("ws://localhost:3000/callfunction","application/json").receive((data)=>{
+			const callFunction = client.connect("ws://localhost:3000/callfunction","application/json");
+			await callFunction.receive((data)=>{
 				document.getElementById("income").value = data.results;
 			}).send({
 				moduleName: "budget",
@@ -39,7 +40,7 @@
 				args:[]
 			});
 
-			client.connect("ws://localhost:3000/callfunction","application/json").receive((data)=>{
+			await callFunction.receive((data)=>{
 				document.getElementById("dailyallowance").value = data.results;
 			}).send({ 
 				moduleName: "budget",
@@ -48,7 +49,7 @@
 				functionName:"getAllowance", 
 				args:[]
 			});
-			client.connect("ws://localhost:3000/callfunction","application/json").receive((data)=>{
+			await callFunction.receive((data)=>{
 				document.getElementById("month").value = data.results;
 			}).send({ 
 				moduleName: "utils-api",
@@ -57,7 +58,7 @@
 				functionName:"getCurrentMonth", 
 				args:[]
 			});
-
+		})();
 		</script>
 	</body>
 </html>
