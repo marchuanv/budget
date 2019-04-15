@@ -32,44 +32,44 @@
 			const connection = new Connection({messageHandler, http: null, WebSocketServer: null, WebSocketClient: null, WebSocket});
 			connection.open(3000,"localhost");
 
-			//getIncome
-			const getIncome = messageHandler.connect("callfunction","application/json","ws");
-			await getIncome.receive((data)=>{
-				document.getElementById("income").value = data.results;
-			});
-			await getIncome.send({
-				moduleName: "budget",
-				fileSpec: "lib/budget.js", 
-				className: "Budget", 
-				functionName:"getIncome", 
-				args:[]
-			});
+			// //getIncome
+			// const getIncome = messageHandler.connect("callfunction","application/json","ws");
+			// await getIncome.receive((data)=>{
+			// 	document.getElementById("income").value = data.results;
+			// });
+			// await getIncome.send({
+			// 	moduleName: "budget",
+			// 	fileSpec: "lib/budget.js", 
+			// 	className: "Budget", 
+			// 	functionName:"getIncome", 
+			// 	args:[]
+			// });
 
-			//getAllowance
-			const getAllowance = messageHandler.connect("callfunction","application/json","ws");
-			await getAllowance.receive((data)=>{
-				document.getElementById("dailyallowance").value = data.results;
-			});
-			await getAllowance.send({ 
-				moduleName: "budget",
-				fileSpec: "lib/budget.js", 
-				className: "Budget", 
-				functionName:"getAllowance", 
-				args:[]
-			});
+			// //getAllowance
+			// const getAllowance = messageHandler.connect("callfunction","application/json","ws");
+			// await getAllowance.receive((data)=>{
+			// 	document.getElementById("dailyallowance").value = data.results;
+			// });
+			// await getAllowance.send({ 
+			// 	moduleName: "budget",
+			// 	fileSpec: "lib/budget.js", 
+			// 	className: "Budget", 
+			// 	functionName:"getAllowance", 
+			// 	args:[]
+			// });
 
-			//getCurrentMonth
-			const getCurrentMonth = messageHandler.connect("callfunction","application/json","ws");
-			await getCurrentMonth.receive((data)=>{
-				document.getElementById("month").value = data.results;
-			});
-			await getCurrentMonth.send({ 
-				moduleName: "utils-api",
-				fileSpec: "lib/utils.js", 
-				className: "Utils", 
-				functionName:"getCurrentMonth", 
-				args:[]
-			});
+			// //getCurrentMonth
+			// const getCurrentMonth = messageHandler.connect("callfunction","application/json","ws");
+			// await getCurrentMonth.receive((data)=>{
+			// 	document.getElementById("month").value = data.results;
+			// });
+			// await getCurrentMonth.send({ 
+			// 	moduleName: "utils-api",
+			// 	fileSpec: "lib/utils.js", 
+			// 	className: "Utils", 
+			// 	functionName:"getCurrentMonth", 
+			// 	args:[]
+			// });
 		})();
 		</script>
 	</body>
