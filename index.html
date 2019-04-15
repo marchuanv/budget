@@ -32,7 +32,11 @@
 
 				const client = new WebSocketClient({websocket:null,Actions});
 				const budgetActions = await client.connect("ws://localhost:3000/callfunction","application/json")
-				budgetActions.send({ fileSpec: "lib/budget.js", className: "Budget", functionName:"reset", args:[20000]});
+				budgetActions
+				.send({ fileSpec: "lib/budget.js", className: "Budget", functionName:"reset", args:[20000]})
+				.receive((data)=>{
+					console.log("received budget data: ",data);
+				});
 			})();
 
 			// const budget = communication.registerSocketEndpoint("application/json","/callfunction");
