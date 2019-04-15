@@ -29,11 +29,13 @@
 		<script type="text/javascript">
 		(async()=>{
 			const client = new WebSocketClient({websocket:null,Actions});
-			const callFunction = client.connect("ws://localhost:3000/callfunction","application/json");
-			await callFunction.receive((data)=>{
+
+			//getIncome
+			const getIncome = client.connect("ws://localhost:3000/callfunction","application/json");
+			await getIncome.receive((data)=>{
 				document.getElementById("income").value = data.results;
 			});
-			await callFunction.send({
+			await getIncome.send({
 				moduleName: "budget",
 				fileSpec: "lib/budget.js", 
 				className: "Budget", 
@@ -41,20 +43,25 @@
 				args:[]
 			});
 
-			await callFunction.receive((data)=>{
+			//getAllowance
+			const getAllowance = client.connect("ws://localhost:3000/callfunction","application/json");
+			await getAllowance.receive((data)=>{
 				document.getElementById("dailyallowance").value = data.results;
 			});
-			await callFunction.send({ 
+			await getAllowance.send({ 
 				moduleName: "budget",
 				fileSpec: "lib/budget.js", 
 				className: "Budget", 
 				functionName:"getAllowance", 
 				args:[]
 			});
-			await callFunction.receive((data)=>{
+
+			//getCurrentMonth
+			const getCurrentMonth = client.connect("ws://localhost:3000/callfunction","application/json");
+			await getCurrentMonth.receive((data)=>{
 				document.getElementById("month").value = data.results;
 			});
-			await callFunction.send({ 
+			await getCurrentMonth.send({ 
 				moduleName: "utils-api",
 				fileSpec: "lib/utils.js", 
 				className: "Utils", 
