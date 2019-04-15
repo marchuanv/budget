@@ -28,10 +28,12 @@
 		</fieldset>
 		<script type="text/javascript">
 		(async()=>{
-			const client = new WebSocketClient({websocket:null,Actions});
+			const messageHandler = new MessageHandler({Actions});
+			const connection = new Connection({messageHandler, http: null, WebSocketServer: null, WebSocketClient: null, WebSocket});
+			connection.open(3000,"localhost");
 
 			//getIncome
-			const getIncome = client.connect("ws://localhost:3000/callfunction","application/json");
+			const getIncome = messageHandler.connect("callfunction","application/json","ws");
 			await getIncome.receive((data)=>{
 				document.getElementById("income").value = data.results;
 			});
@@ -44,7 +46,7 @@
 			});
 
 			//getAllowance
-			const getAllowance = client.connect("ws://localhost:3000/callfunction","application/json");
+			const getAllowance = messageHandler.connect("callfunction","application/json","ws");
 			await getAllowance.receive((data)=>{
 				document.getElementById("dailyallowance").value = data.results;
 			});
@@ -57,7 +59,7 @@
 			});
 
 			//getCurrentMonth
-			const getCurrentMonth = client.connect("ws://localhost:3000/callfunction","application/json");
+			const getCurrentMonth = messageHandler.connect("callfunction","application/json","ws");
 			await getCurrentMonth.receive((data)=>{
 				document.getElementById("month").value = data.results;
 			});
