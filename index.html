@@ -28,28 +28,14 @@
 		</fieldset>
 		<script type="text/javascript">
 			(async()=>{
+				
 				const client = new WebSocketClient();
-				await client.connect("ws://localhost:3000/callfunction","application/json");
+				await client.connect("ws://localhost:3000/callfunction","application/json").send({
+					fileSpec: "lib/budget.js", className: "Budget", functionName:"reset", args:[20000]
+				});
+
 			})();
 
-			// const utils = communication.registerSocketEndpoint("application/json","/script")
-			// 				.send({ moduleName: "utils", fileSpec: "lib/utils.js" })
-			// 				.receive((script)=>{
-			// 						console	.log("script: ",script	);
-			// 				});
-
-
-			// const utils = new Utils({setTimeout, setInterval, clearInterval, console});
-
-			// const communication = new Communication({
-			// 	websocket: WebSocket, 
-			// 	utils,
-			// 	http: null,
-			// 	isNodeJsContext: false, 
-			// 	isClient: true,
-			// 	host: "localhost",
-			// 	port: "3000"
-			// });
 			// const budget = communication.registerSocketEndpoint("application/json","/callfunction");
 			// const utils = communication.registerSocketEndpoint("application/json","/callfunction");
 
