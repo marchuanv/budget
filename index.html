@@ -1,8 +1,7 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="styles.css">
-		<script type="text/javascript" src="websocketclient.js"></script>
-		<script type="text/javascript" src="actions.js"></script>
+		<script type="text/javascript" src="communication-api.js"></script>
 		<title>Budget</title>
 	</head>
 	<body>
@@ -28,16 +27,99 @@
 			</fieldset>
 		</fieldset>
 		<script type="text/javascript">
-			(async()=>{
+			const client = new WebSocketClient({websocket:null,Actions});
+			
+			client.connect("ws://localhost:3000/callfunction","application/json").receive((data)=>{
+				document.getElementById("income").value = data.results;
+			}).send({ 
+				fileSpec: "lib/budget.js", 
+				className: "Budget", 
+				functionName:"getIncome", 
+				args:[]
+			});
 
-				const client = new WebSocketClient({websocket:null,Actions});
-				const budgetActions = await client.connect("ws://localhost:3000/callfunction","application/json")
-				budgetActions
-				.send({ fileSpec: "lib/budget.js", className: "Budget", functionName:"reset", args:[20000]})
-				.receive((data)=>{
-					console.log("received budget data: ",data);
-				});
-			})();
+			client.connect("ws://localhost:3000/callfunction","application/json").receive((data)=>{
+				document.getElementById("dailyallowance").value = data.results;
+			}).send({ 
+				fileSpec: "lib/budget.js", 
+				className: "Budget", 
+				functionName:"getAllowance", 
+				args:[]
+			});
+			client.connect("ws://localhost:3000/callfunction","application/json").receive((data)=>{
+				document.getElementById("month").value = data.results;
+			}).send({ 
+				fileSpec: "lib/utils.js", 
+				className: "Utils", 
+				functionName:"getCurrentMonth", 
+				args:[]
+			});
+
+
+			// function submit(){
+
+			// 	const expenses = [];
+			// 	for (const expenseEle of document.getElementById("allexpenses").children) {
+			// 		const split = expenseEle.innerText.split(":");
+			// 		if (split[0] && split[1] && expenseEle.className === "expense"){
+			// 			const name = split[0];
+			// 			const amountStr = split[1].replace("R","");
+			// 			expenses.push({name, amount: parseFloat(amountStr)});
+			// 		}
+			// 	};
+			// 	for(const expense of expenses){
+
+			// 	};
+
+			// 	const incomeAfterTax - document.getElementById("income").value;
+			// 	client.connect("ws://localhost:3000/callfunction","application/json").receive((data)=>{
+			// 			//load 
+			// 	}).send({ 
+			// 		fileSpec: "lib/budget.js", 
+			// 		className: "Budget", 
+			// 		functionName:"reset", 
+			// 		args:[incomeAfterTax]
+			// 	});
+
+			// 	const monthYear=document.getElementById("month").value;
+			// 	const monthYearArray=monthYear.split("-");
+			// 	client.connect("ws://localhost:3000/callfunction","application/json").receive((data)=>{
+			// 		const remainingdays = data.results;
+
+			// 	}).send({fileSpec: "lib/utils.js", className: "Utils", functionName:"getRemainingDays", args:[monthYearArray[1]]});
+
+			// 	const allowance = await budget.getAllowance();
+			// 	await balance.reset(remainingdays, allowance);
+			// 	location.reload();
+			// }
+
+			// (async()=>{
+				
+
+				// client.connect("ws://localhost:3000/callfunction","application/json").receive((data)=>{
+						
+				// 		document.getElementById("income").value = data.results;
+				// 		const expenses = [];
+				// 		for (const expenseEle of document.getElementById("allexpenses").children) {
+				// 			const split = expenseEle.innerText.split(":");
+				// 			if (split[0] && split[1] && expenseEle.className === "expense"){
+				// 				const name = split[0];
+				// 				const amountStr = split[1].replace("R","");
+				// 				expenses.push({name, amount: parseFloat(amountStr)});
+				// 			}
+				// 		};
+				// 		for(const expense of expenses){
+				// 			await budget.addExpense(expense.name, expense.amount);	
+				// 		};
+
+				// }).send({ 
+				// 	fileSpec: "lib/budget.js", 
+				// 	className: "Budget", 
+				// 	functionName:"reset", 
+				// 	args:[20000]
+				// });
+
+			// })();
 
 			// const budget = communication.registerSocketEndpoint("application/json","/callfunction");
 			// const utils = communication.registerSocketEndpoint("application/json","/callfunction");
