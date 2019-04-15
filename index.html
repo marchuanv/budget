@@ -32,7 +32,8 @@
 			const callFunction = client.connect("ws://localhost:3000/callfunction","application/json");
 			await callFunction.receive((data)=>{
 				document.getElementById("income").value = data.results;
-			}).send({
+			});
+			await callFunction.send({
 				moduleName: "budget",
 				fileSpec: "lib/budget.js", 
 				className: "Budget", 
@@ -42,7 +43,8 @@
 
 			await callFunction.receive((data)=>{
 				document.getElementById("dailyallowance").value = data.results;
-			}).send({ 
+			});
+			await callFunction.send({ 
 				moduleName: "budget",
 				fileSpec: "lib/budget.js", 
 				className: "Budget", 
@@ -51,7 +53,8 @@
 			});
 			await callFunction.receive((data)=>{
 				document.getElementById("month").value = data.results;
-			}).send({ 
+			});
+			await callFunction.send({ 
 				moduleName: "utils-api",
 				fileSpec: "lib/utils.js", 
 				className: "Utils", 
