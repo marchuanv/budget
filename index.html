@@ -28,12 +28,11 @@
 		</fieldset>
 		<script type="text/javascript">
 			(async()=>{
-				
 				const client = new WebSocketClient();
-				await client.connect("ws://localhost:3000/callfunction","application/json").send({
+				const budgetConnection = await client.connect("ws://localhost:3000/callfunction","application/json")
+				budgetConnection.send({
 					fileSpec: "lib/budget.js", className: "Budget", functionName:"reset", args:[20000]
 				});
-
 			})();
 
 			// const budget = communication.registerSocketEndpoint("application/json","/callfunction");
