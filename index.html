@@ -29,6 +29,7 @@
 		</fieldset>
 		<script type="text/javascript">
 		(async()=>{
+			document.getElementById("loader").style.display = "none";
 			const utils = new Utils();
 			const communication = new Communication({ http: null, websocket: WebSocket, utils });
 			await communication.connectWebClient("localhost",3000);
@@ -38,6 +39,7 @@
 					
 					communication.subscribe("/getIncome", "websocket", async({data})=>{
 						document.getElementById("income").value = data;
+						document.getElementById("loader").style.display = "none";
 					});
 					communication.publish("/getIncome", "websocket", {
 						moduleName: data.moduleName,
@@ -48,6 +50,7 @@
 
 					communication.subscribe("/getAllowance", "websocket", async({data})=>{
 						document.getElementById("dailyallowance").value = data;
+						document.getElementById("loader").style.display = "none";
 					});
 					communication.publish("/getAllowance", "websocket", { 
 						moduleName: data.moduleName,
@@ -60,6 +63,7 @@
 				if (data.className === "Utils"){
 					communication.subscribe("/getCurrentMonth", "websocket", async({data})=>{
 						document.getElementById("month").value = data;
+						document.getElementById("loader").style.display = "none";
 					});
 					communication.publish("/getCurrentMonth", "websocket", { 
 						moduleName: data.moduleName,
