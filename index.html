@@ -30,14 +30,14 @@
 		<script type="text/javascript">
 		(async()=>{
 
-			function createExpense = ({name, amount}) => {
+			const createExpense = ({name, amount}) => {
 				const expenses = document.getElementById("allexpenses");
 				const newExpense = document.createElement("div");
 				newExpense.setAttribute("class", "expense");
 				newExpense.innerText = `${name}: R ${amount}`;
 				expenses.appendChild(newExpense);
 			}
-			
+
 			document.getElementById("loader").style.display = "none";
 			const utils = new Utils();
 			const communication = new Communication({ http: null, websocket: WebSocket, utils });
