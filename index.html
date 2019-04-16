@@ -29,17 +29,27 @@
 		</fieldset>
 		<script type="text/javascript">
 		(async()=>{
+
+			function createExpense = ({name, amount}) => {
+				const expenses = document.getElementById("allexpenses");
+				const newExpense = document.createElement("div");
+				newExpense.setAttribute("class", "expense");
+				newExpense.innerText = `${name}: R ${amount}`;
+				expenses.appendChild(newExpense);
+			}
+			
 			document.getElementById("loader").style.display = "none";
 			const utils = new Utils();
 			const communication = new Communication({ http: null, websocket: WebSocket, utils });
 			await communication.connectWebClient("localhost",3000);
 
+			document.getElementById("loader").style.display = "none";
+			
 			communication.subscribe("/register", "websocket", async({data})=>{
 				if (data.className === "Budget"){
 					
 					communication.subscribe("/getIncome", "websocket", async({data})=>{
 						document.getElementById("income").value = data;
-						document.getElementById("loader").style.display = "none";
 					});
 					communication.publish("/getIncome", "websocket", {
 						moduleName: data.moduleName,
@@ -50,9 +60,20 @@
 
 					communication.subscribe("/getAllowance", "websocket", async({data})=>{
 						document.getElementById("dailyallowance").value = data;
-						document.getElementById("loader").style.display = "none";
 					});
 					communication.publish("/getAllowance", "websocket", { 
+						moduleName: data.moduleName,
+						fileSpec: data.fileSpec,
+						className: data.className,
+						args:[]
+					});
+
+					communication.subscribe("/getExpenses", "websocket", async({data})=>{
+						for(const exp of data){
+							createExpense(exp);
+						};
+					});
+					communication.publish("/getExpenses", "websocket", { 
 						moduleName: data.moduleName,
 						fileSpec: data.fileSpec,
 						className: data.className,
@@ -63,7 +84,6 @@
 				if (data.className === "Utils"){
 					communication.subscribe("/getCurrentMonth", "websocket", async({data})=>{
 						document.getElementById("month").value = data;
-						document.getElementById("loader").style.display = "none";
 					});
 					communication.publish("/getCurrentMonth", "websocket", { 
 						moduleName: data.moduleName,
@@ -85,6 +105,7 @@
 				className: "Utils"
 			});
 
+			
 		})();
 		</script>
 	</body>
