@@ -31,7 +31,7 @@
 		(async()=>{
 			const utils = new Utils();
 			const communication = new Communication({ http: null, websocket: WebSocket, utils });
-			await communication.connectWebClient(3000, "localhost", "callfunction");
+			await communication.connectWebClient(3000, "localhost", "register");
 
 			communication.publish("/register", "websocket", {
 				moduleName: "budget",
