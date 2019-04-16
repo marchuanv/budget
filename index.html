@@ -33,6 +33,43 @@
 			const communication = new Communication({ http: null, websocket: WebSocket, utils });
 			await communication.connectWebClient("localhost",3000);
 
+			communication.subscribe("/register", "websocket", async({data})=>{
+				if (data.className === "Budget"){
+					
+					communication.subscribe("/getIncome", "websocket", async({data})=>{
+						document.getElementById("income").value = data;
+					});
+					communication.publish("/getIncome", "websocket", {
+						moduleName: data.moduleName,
+						fileSpec: data.fileSpec,
+						className: data.className,
+						args:[]
+					});
+
+					communication.subscribe("/getAllowance", "websocket", async({data})=>{
+						document.getElementById("dailyallowance").value = data;
+					});
+					communication.publish("/getAllowance", "websocket", { 
+						moduleName: data.moduleName,
+						fileSpec: data.fileSpec,
+						className: data.className,
+						args:[]
+					});
+
+				}
+				if (data.className === "Utils"){
+					communication.subscribe("/getCurrentMonth", "websocket", async({data})=>{
+						document.getElementById("month").value = data;
+					});
+					communication.publish("/getCurrentMonth", "websocket", { 
+						moduleName: data.moduleName,
+						fileSpec: data.fileSpec,
+						className: data.className,
+						args:[]
+					});
+				}
+			});
+
 			communication.publish("/register", "websocket", {
 				moduleName: "budget",
 				fileSpec: "lib/budget.js", 
@@ -42,36 +79,6 @@
 				moduleName: "utils-api",
 				fileSpec: "lib/utils.js",
 				className: "Utils"
-			});
-
-			communication.subscribe("/getIncome", "websocket", async({data})=>{
-				document.getElementById("income").value = data;
-			});
-			communication.publish("/getIncome", "websocket", {
-				moduleName: "budget",
-				fileSpec: "lib/budget.js", 
-				className: "Budget",
-				args:[]
-			});
-
-			communication.subscribe("/getAllowance", "websocket", async({data})=>{
-				document.getElementById("dailyallowance").value = data;
-			});
-			communication.publish("/getAllowance", "websocket", { 
-				moduleName: "budget",
-				fileSpec: "lib/budget.js", 
-				className: "Budget",
-				args:[]
-			});
-
-			communication.subscribe("/getCurrentMonth", "websocket", async({data})=>{
-				document.getElementById("month").value = data;
-			});
-			communication.publish("/getCurrentMonth", "websocket", { 
-				moduleName: "utils-api",
-				fileSpec: "lib/utils.js", 
-				className: "Utils", 
-				args:[]
 			});
 
 		})();
