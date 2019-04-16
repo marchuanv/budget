@@ -104,7 +104,7 @@
 				createExpense(exp);
 			};
 
-			async function submit(){
+			window.submit = async()=> {
 				const expenses = [];
 				for (const expenseEle of document.getElementById("allexpenses").children) {
 					const split = expenseEle.innerText.split(":");
@@ -132,7 +132,7 @@
 				location.reload();
 			}
 
-			function addExpense(){
+			window.addExpense = async()=> {
 				const expenseNameElement = document.getElementById("expensename");
 				const expenseValueElement = document.getElementById("expensevalue");
 				createExpense({
