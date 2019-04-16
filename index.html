@@ -92,28 +92,28 @@
 			};
 
 			function submit(){
-				const expenses = [];
-				for (const expenseEle of document.getElementById("allexpenses").children) {
-					const split = expenseEle.innerText.split(":");
-					if (split[0] && split[1] && expenseEle.className === "expense"){
-						const name = split[0];
-						const amountStr = split[1].replace("R","");
-						expenses.push({name, amount: parseFloat(amountStr)});
-					}
-				};
-				for(const expense of expenses){
-					await window.addExpense(expense);	
-				};
-				const incomeElement = document.getElementById("income");
-				window.reset(incomeElement.value);
+				// const expenses = [];
+				// for (const expenseEle of document.getElementById("allexpenses").children) {
+				// 	const split = expenseEle.innerText.split(":");
+				// 	if (split[0] && split[1] && expenseEle.className === "expense"){
+				// 		const name = split[0];
+				// 		const amountStr = split[1].replace("R","");
+				// 		expenses.push({name, amount: parseFloat(amountStr)});
+				// 	}
+				// };
+				// for(const expense of expenses){
+				// 	await window.addExpense(expense);	
+				// };
+				// const incomeElement = document.getElementById("income");
+				// window.reset(incomeElement.value);
 
-				const monthYear=document.getElementById("month").value;
-				const monthYearArray=monthYear.split("-");
-				const remainingdays = await window.getRemainingDays(monthYearArray[1]);
+				// const monthYear=document.getElementById("month").value;
+				// const monthYearArray=monthYear.split("-");
+				// const remainingdays = await window.getRemainingDays(monthYearArray[1]);
 
-				const allowance = await budget.getAllowance();
-				await balance.reset(remainingdays, allowance);
-				location.reload();
+				// const allowance = await budget.getAllowance();
+				// await balance.reset(remainingdays, allowance);
+				// location.reload();
 			}
 
 			function addExpense(){
