@@ -30,14 +30,14 @@
 		<script type="text/javascript">
 		(async()=>{
 			const utils = new Utils();
-			const communication = new Communication({appName:"budget", http: null, websocket: WebSocket, utils });
-			communication.connectClient(3000,"localhost","callfunction");
+			const communication = new Communication({ http: null, websocket: WebSocket, utils });
+			communication.connectClient(3000, "localhost", "callfunction");
 
-			communication.subscribe("callfunction", "application/json", async()=>{
+			communication.subscribe("callfunction", "websocket", "application/json", async()=>{
 				document.getElementById("income").value = data.results;
 			});
 
-			communication.publish("callfunction", {
+			communication.publish("callfunction", "websocket", {
 				moduleName: "budget",
 				fileSpec: "lib/budget.js", 
 				className: "Budget", 
