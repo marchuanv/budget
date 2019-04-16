@@ -93,7 +93,7 @@
 				createExpense(exp);
 			};
 
-			function submit(){
+			async function submit(){
 				const expenses = [];
 				for (const expenseEle of document.getElementById("allexpenses").children) {
 					const split = expenseEle.innerText.split(":");
