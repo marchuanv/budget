@@ -52,23 +52,34 @@
 			const communication = new Communication({ http: null, websocket: WebSocket, utils });
 			await communication.connectWebClient("localhost",3000);
 
+			window.regisrations=[];
+
 			const callFunction=(functionName, args, moduleName, fileSpec, className )=>{
 				return new Promise((resolve)=>{
 					let func = window[functionName];
 					if (func){
 						resolve(func(args));
 					} else {
-						communication.subscribe("/register", "websocket", async()=>{
+						const regisration = window.regisrations.find(x=>x.moduleName === moduleName && x.fileSpec === fileSpec && x.className === className);
+						if (regisration){
 							window[functionName]=(_args)=>{
-								communication.subscribe(`/${functionName}`, "websocket", async({data})=>{
-									resolve(data);
-								});
+								communication.subscribe(`/${functionName}`, "websocket", async({data})=> resolve(data));
 								communication.publish(`/${functionName}`, "websocket", { moduleName, fileSpec, className, args: _args });
 							}
 							func = window[functionName];
 							func(args);
-						});
-						communication.publish(`/register`, "websocket", { moduleName, fileSpec, className });
+						} else {
+							communication.subscribe("/register", "websocket", async({data})=> {
+								window.regisrations.push(data);
+								window[functionName]=(_args)=>{
+									communication.subscribe(`/${functionName}`, "websocket", async({data})=> resolve(data));
+									communication.publish(`/${functionName}`, "websocket", { moduleName, fileSpec, className, args: _args });
+								}
+								func = window[functionName];
+								func(args);
+							});
+							communication.publish(`/register`, "websocket", { moduleName, fileSpec, className });
+						}
 					}
 				});
 			}
