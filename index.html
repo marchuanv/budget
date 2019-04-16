@@ -48,80 +48,72 @@
 				document.getElementById("loader").style.display = "none";
 			}
 
-			unsecurePageFromUser();
-
 			const utils = new Utils();
 			const communication = new Communication({ http: null, websocket: WebSocket, utils });
 			await communication.connectWebClient("localhost",3000);
 
+			const callFunction=(functionName, args, moduleName, fileSpec, className )=>{
+				return new Promise((resolve)=>{
+					let func = window[functionName];
+					if (func){
+						resolve(func(args));
+					} else {
+						communication.subscribe("/register", "websocket", async()=>{
+							window[functionName]=(_args)=>{
+								communication.subscribe(`/${functionName}`, "websocket", resolve);
+								communication.publish(`/${functionName}`, "websocket", { moduleName, fileSpec, className, args: _args });
+							}
+							func = window[functionName];
+							func(args);
+						});
+						communication.publish(`/register`, "websocket", { moduleName, fileSpec, className });
+					}
+				});
+			}
+
+			unsecurePageFromUser();
+
 			document.getElementById("loader").style.display = "none";
-			
-			communication.subscribe("/register", "websocket", async({data})=>{
-				if (data.className === "Budget"){
-					
-					communication.subscribe("/getIncome", "websocket", async({data})=>{
-						document.getElementById("income").value = data;
-					});
-					communication.publish("/getIncome", "websocket", {
-						moduleName: data.moduleName,
-						fileSpec: data.fileSpec,
-						className: data.className,
-						args:[]
-					});
 
-					communication.subscribe("/getAllowance", "websocket", async({data})=>{
-						document.getElementById("dailyallowance").value = data;
-					});
-					communication.publish("/getAllowance", "websocket", { 
-						moduleName: data.moduleName,
-						fileSpec: data.fileSpec,
-						className: data.className,
-						args:[]
-					});
+			document.getElementById("income").value = await callFunction("/getIncome", [], "budget", "lib/budget.js", "Budget" );
+			document.getElementById("balance").value = await callFunction("/getAllowance", [], "budget", "lib/budget.js", "Budget" );
 
-					communication.subscribe("/getExpenses", "websocket", async({data})=>{
-						for(const exp of data){
-							createExpense(exp);
-						};
-					});
-					communication.publish("/getExpenses", "websocket", { 
-						moduleName: data.moduleName,
-						fileSpec: data.fileSpec,
-						className: data.className,
-						args:[]
-					});
+			const budgetDate = await callFunction("/getDate", [], "budget", "lib/budget.js", "Budget" );
+			const year = budgetDate.getFullYear();
+			const month = budgetDate.getMonth()+1;
+			document.getElementById("month").value = `${year}-${('0' + month).slice(-2)}`;
 
-					communication.subscribe("/getDate", "websocket", async({data})=>{
-						if (data){
-							const year = data.getFullYear();
-							const month = data.getMonth()+1;
-							document.getElementById("month").value = `${year}-${('0' + month).slice(-2)}`;
-						}
-					});
-					communication.publish("/getDate", "websocket", { 
-						moduleName: data.moduleName,
-						fileSpec: data.fileSpec,
-						className: data.className,
-						args:[]
-					});
+			const dailyAllowance =  await callFunction("/getDailyAllowance", [], "budget", "lib/budget.js", "Balance" );
+			document.getElementById("dailyallowance").value = Math.round(dailyAllowance * 100) / 100;
 
-				}
-			});
-
-			communication.publish("/register", "websocket", {
-				moduleName: "budget",
-				fileSpec: "lib/budget.js", 
-				className: "Budget"
-			});
-			communication.publish("/register", "websocket", {
-				moduleName: "utils-api",
-				fileSpec: "lib/utils.js",
-				className: "Utils"
-			});
-
+			const expenses =  await callFunction("/getExpenses", [], "budget", "lib/budget.js", "Budget" );
+			for(const exp of expenses){
+				createExpense(exp);
+			};
 
 			function submit(){
+				const expenses = [];
+				for (const expenseEle of document.getElementById("allexpenses").children) {
+					const split = expenseEle.innerText.split(":");
+					if (split[0] && split[1] && expenseEle.className === "expense"){
+						const name = split[0];
+						const amountStr = split[1].replace("R","");
+						expenses.push({name, amount: parseFloat(amountStr)});
+					}
+				};
+				for(const expense of expenses){
+					await window.addExpense(expense);	
+				};
+				const incomeElement = document.getElementById("income");
+				window.reset(incomeElement.value);
 
+				const monthYear=document.getElementById("month").value;
+				const monthYearArray=monthYear.split("-");
+				const remainingdays = await window.getRemainingDays(monthYearArray[1]);
+
+				const allowance = await budget.getAllowance();
+				await balance.reset(remainingdays, allowance);
+				location.reload();
 			}
 
 			function addExpense(){
