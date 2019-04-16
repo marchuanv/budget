@@ -91,6 +91,20 @@
 						args:[]
 					});
 
+					communication.subscribe("/getDate", "websocket", async({data})=>{
+						if (data){
+							const year = data.getFullYear();
+							const month = data.getMonth()+1;
+							document.getElementById("month").value = `${year}-${('0' + month).slice(-2)}`;
+						}
+					});
+					communication.publish("/getDate", "websocket", { 
+						moduleName: data.moduleName,
+						fileSpec: data.fileSpec,
+						className: data.className,
+						args:[]
+					});
+
 				}
 				if (data.className === "Utils"){
 					communication.subscribe("/getCurrentMonth", "websocket", async({data})=>{
