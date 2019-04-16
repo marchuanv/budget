@@ -85,7 +85,7 @@
 			const month = budgetDate.getMonth()+1;
 			document.getElementById("month").value = `${year}-${('0' + month).slice(-2)}`;
 
-			const dailyAllowance =  await callFunction("getDailyAllowance", [], "budget", "lib/budget.js", "Balance" );
+			const dailyAllowance =  await callFunction("getDailyAllowance", [], "budget", "lib/balance.js", "Balance" );
 			document.getElementById("dailyallowance").value = Math.round(dailyAllowance * 100) / 100;
 
 			const expenses =  await callFunction("getExpenses", [], "budget", "lib/budget.js", "Budget" );
