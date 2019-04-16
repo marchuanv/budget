@@ -28,17 +28,18 @@
 		</fieldset>
 		<script type="text/javascript">
 		(async()=>{
-			const messageHandler = new MessageHandler({Actions});
-			
-			const connection = new Connection({messageHandler, http: null, WebSocketServer: null, WebSocketClient: null, WebSocket});
+			const httpMessageHandler = new MessageHandler();
+			const webSocketMessageHandler = new MessageHandler();
+
+			const subscriberId = "budgetApp";
+			const connection = new Connection({httpMessageHandler, webSocketMessageHandler, http: null, WebSocketServer: null, WebSocketClient: null, WebSocket});
 			connection.open(3000,"localhost","callfunction");
 
 			//getIncome
-			const getIncome = messageHandler.subscribeToWebSocket("callfunction","application/json");
-			await getIncome.receive((data)=>{
+			messageHandler.subscribe("callfunction",subscriberId,"application/json").then(async()=>{
 				document.getElementById("income").value = data.results;
 			});
-			await getIncome.send({
+			messageHandler.publish("callfunction", subscriberId, {
 				moduleName: "budget",
 				fileSpec: "lib/budget.js", 
 				className: "Budget", 
