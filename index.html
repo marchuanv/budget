@@ -37,7 +37,7 @@
 				document.getElementById("income").value = data.results;
 			});
 
-			communication.publish("callfunction", "websocket", {
+			communication.publish("/callfunction", "websocket", {
 				moduleName: "budget",
 				fileSpec: "lib/budget.js", 
 				className: "Budget", 
