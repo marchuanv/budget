@@ -29,7 +29,7 @@
 		<script type="text/javascript">
 		(async()=>{
 			
-			const communication = new Communication({http: null, websocket: WebSocket });
+			const communication = new Communication({appName:"budget", http: null, websocket: WebSocket });
 			communication.connectClient(3000,"localhost","callfunction");
 
 			communication.subscribe("callfunction", "application/json", async()=>{
