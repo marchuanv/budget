@@ -106,17 +106,6 @@
 					});
 
 				}
-				if (data.className === "Utils"){
-					communication.subscribe("/getCurrentMonth", "websocket", async({data})=>{
-						document.getElementById("month").value = data;
-					});
-					communication.publish("/getCurrentMonth", "websocket", { 
-						moduleName: data.moduleName,
-						fileSpec: data.fileSpec,
-						className: data.className,
-						args:[]
-					});
-				}
 			});
 
 			communication.publish("/register", "websocket", {
