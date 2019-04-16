@@ -33,7 +33,7 @@
 			const communication = new Communication({ http: null, websocket: WebSocket, utils });
 			await communication.connectWebClient(3000, "localhost", "callfunction");
 
-			communication.subscribe("/callfunction", "websocket", "application/json", async()=>{
+			communication.subscribe("/callfunction", "websocket", async()=>{
 				document.getElementById("income").value = data.results;
 			});
 
