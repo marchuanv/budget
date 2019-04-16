@@ -60,7 +60,9 @@
 					} else {
 						communication.subscribe("/register", "websocket", async()=>{
 							window[functionName]=(_args)=>{
-								communication.subscribe(`/${functionName}`, "websocket", resolve);
+								communication.subscribe(`/${functionName}`, "websocket", async({data})=>{
+									resolve(data);
+								});
 								communication.publish(`/${functionName}`, "websocket", { moduleName, fileSpec, className, args: _args });
 							}
 							func = window[functionName];
@@ -115,7 +117,7 @@
 				const allowance = await callFunction("getAllowance", [], "budget", "lib/budget.js", "Budget" );
 
 				await callFunction("reset", [remainingdays, allowance], "budget", "lib/balance.js", "Balance" );
-				
+
 				location.reload();
 			}
 
