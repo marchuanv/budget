@@ -38,7 +38,18 @@
 				expenses.appendChild(newExpense);
 			}
 
-			document.getElementById("loader").style.display = "none";
+			const securePageFromUser = () => {
+				document.getElementById("budgetform").style.display = "none";
+				document.getElementById("loader").style.display = "block";
+			}
+
+			const unsecurePageFromUser = () => {
+				document.getElementById("budgetform").style.display = "block";
+				document.getElementById("loader").style.display = "none";
+			}
+
+			unsecurePageFromUser();
+
 			const utils = new Utils();
 			const communication = new Communication({ http: null, websocket: WebSocket, utils });
 			await communication.connectWebClient("localhost",3000);
@@ -105,6 +116,21 @@
 				className: "Utils"
 			});
 
+
+			function submit(){
+
+			}
+
+			function addExpense(){
+				const expenseNameElement = document.getElementById("expensename");
+				const expenseValueElement = document.getElementById("expensevalue");
+				createExpense({
+					name: expenseNameElement.value,
+					amount: Number(expenseNameElement.amount)
+				});
+				expenseNameElement.value = null;
+				expenseValueElement.value = null;
+			}
 			
 		})();
 		</script>
