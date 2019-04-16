@@ -34,7 +34,7 @@
 			await communication.connectWebClient(3000, "localhost", "callfunction");
 
 			communication.subscribe("/callfunction", "websocket", async({data})=>{
-				document.getElementById("income").value = data.results;
+				document.getElementById("income").value = data;
 			});
 
 			communication.publish("/callfunction", "websocket", {
