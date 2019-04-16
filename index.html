@@ -36,7 +36,6 @@
 			communication.subscribe("/callfunction", "websocket", async({data})=>{
 				document.getElementById("income").value = data;
 			});
-
 			communication.publish("/callfunction", "websocket", {
 				moduleName: "budget",
 				fileSpec: "lib/budget.js", 
@@ -45,31 +44,28 @@
 				args:[]
 			});
 
-			// //getAllowance
-			// const getAllowance = messageHandler.connect("callfunction","application/json","ws");
-			// await getAllowance.receive((data)=>{
-			// 	document.getElementById("dailyallowance").value = data.results;
-			// });
-			// await getAllowance.send({ 
-			// 	moduleName: "budget",
-			// 	fileSpec: "lib/budget.js", 
-			// 	className: "Budget", 
-			// 	functionName:"getAllowance", 
-			// 	args:[]
-			// });
+			communication.subscribe("/callfunction", "websocket", async({data})=>{
+				document.getElementById("dailyallowance").value = data;
+			});
+			communication.publish("/callfunction", "websocket", { 
+				moduleName: "budget",
+				fileSpec: "lib/budget.js", 
+				className: "Budget", 
+				functionName:"getAllowance", 
+				args:[]
+			});
 
-			// //getCurrentMonth
-			// const getCurrentMonth = messageHandler.connect("callfunction","application/json","ws");
-			// await getCurrentMonth.receive((data)=>{
-			// 	document.getElementById("month").value = data.results;
-			// });
-			// await getCurrentMonth.send({ 
-			// 	moduleName: "utils-api",
-			// 	fileSpec: "lib/utils.js", 
-			// 	className: "Utils", 
-			// 	functionName:"getCurrentMonth", 
-			// 	args:[]
-			// });
+			communication.subscribe("/callfunction", "websocket", async({data})=>{
+				document.getElementById("month").value = data;
+			});
+			communication.publish("/callfunction", "websocket", { 
+				moduleName: "utils-api",
+				fileSpec: "lib/utils.js", 
+				className: "Utils", 
+				functionName:"getCurrentMonth", 
+				args:[]
+			});
+
 		})();
 		</script>
 	</body>
