@@ -75,45 +75,48 @@
 
 			document.getElementById("loader").style.display = "none";
 
-			document.getElementById("income").value = await callFunction("/getIncome", [], "budget", "lib/budget.js", "Budget" );
-			document.getElementById("balance").value = await callFunction("/getAllowance", [], "budget", "lib/budget.js", "Budget" );
+			document.getElementById("income").value = await callFunction("getIncome", [], "budget", "lib/budget.js", "Budget" );
+			document.getElementById("balance").value = await callFunction("getAllowance", [], "budget", "lib/budget.js", "Budget" );
 
-			const budgetDate = await callFunction("/getDate", [], "budget", "lib/budget.js", "Budget" );
+			const budgetDate = await callFunction("getDate", [], "budget", "lib/budget.js", "Budget" );
 			const year = budgetDate.getFullYear();
 			const month = budgetDate.getMonth()+1;
 			document.getElementById("month").value = `${year}-${('0' + month).slice(-2)}`;
 
-			const dailyAllowance =  await callFunction("/getDailyAllowance", [], "budget", "lib/budget.js", "Balance" );
+			const dailyAllowance =  await callFunction("getDailyAllowance", [], "budget", "lib/budget.js", "Balance" );
 			document.getElementById("dailyallowance").value = Math.round(dailyAllowance * 100) / 100;
 
-			const expenses =  await callFunction("/getExpenses", [], "budget", "lib/budget.js", "Budget" );
+			const expenses =  await callFunction("getExpenses", [], "budget", "lib/budget.js", "Budget" );
 			for(const exp of expenses){
 				createExpense(exp);
 			};
 
 			function submit(){
-				// const expenses = [];
-				// for (const expenseEle of document.getElementById("allexpenses").children) {
-				// 	const split = expenseEle.innerText.split(":");
-				// 	if (split[0] && split[1] && expenseEle.className === "expense"){
-				// 		const name = split[0];
-				// 		const amountStr = split[1].replace("R","");
-				// 		expenses.push({name, amount: parseFloat(amountStr)});
-				// 	}
-				// };
-				// for(const expense of expenses){
-				// 	await window.addExpense(expense);	
-				// };
-				// const incomeElement = document.getElementById("income");
-				// window.reset(incomeElement.value);
+				const expenses = [];
+				for (const expenseEle of document.getElementById("allexpenses").children) {
+					const split = expenseEle.innerText.split(":");
+					if (split[0] && split[1] && expenseEle.className === "expense"){
+						const name = split[0];
+						const amountStr = split[1].replace("R","");
+						expenses.push({name, amount: parseFloat(amountStr)});
+					}
+				};
+				for(const expense of expenses){
+					await callFunction("addExpense", [expense.name,expense.value], "budget", "lib/budget.js", "Budget" );
+				};
+				const incomeElement = document.getElementById("income");
 
-				// const monthYear=document.getElementById("month").value;
-				// const monthYearArray=monthYear.split("-");
-				// const remainingdays = await window.getRemainingDays(monthYearArray[1]);
+				await callFunction("reset", [incomeElement.value], "budget", "lib/budget.js", "Budget" );
 
-				// const allowance = await budget.getAllowance();
-				// await balance.reset(remainingdays, allowance);
-				// location.reload();
+				const monthYear=document.getElementById("month").value;
+				const monthYearArray=monthYear.split("-");
+
+				const remainingdays = await callFunction("getRemainingDays", [monthYearArray[1]], "utils", "lib/utils.js", "Utils" );
+				const allowance = await callFunction("getAllowance", [], "budget", "lib/budget.js", "Budget" );
+
+				await callFunction("reset", [remainingdays, allowance], "budget", "lib/balance.js", "Balance" );
+				
+				location.reload();
 			}
 
 			function addExpense(){
