@@ -21,6 +21,8 @@
   "homepage": "https://github.com/marchuanv/budget#readme",
   "files":{
       "balance": "lib/balance.js",
-      "budget": "lib/budget.js"
+      "budget": "lib/budget.js",
+      "index" : "index.html",
+      "styles" : "styles.css"
   }
 }
