@@ -24,5 +24,8 @@
       "budget": "lib/budget.js",
       "index" : "index.html",
       "styles" : "styles.css"
+  },
+  "dependencies": {
+      "eventpublisher": "git+https://github.com/marchuanv/eventpublisher.git"
   }
 }
