@@ -48,7 +48,8 @@
 			}
 
 			const publisher = new Publisher({ http: null, websocket: WebSocket, host:"localhost", port: 3000 });
-			publisher.client("http",true);
+			publisher.client("http",true)
+				.publish("getDate").then( () => [] );
 
 			// unsecurePageFromUser();
 
