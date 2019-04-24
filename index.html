@@ -54,7 +54,7 @@
 				port: 3000 
 			});
 
-			publisher.client("http",true).subscribe("getDate").then((data) => {
+			publisher.subscribe("getDate").then((data) => {
 				console.log("RECEVIED DATA: ",data);
 			}).publish("getDate");
 
