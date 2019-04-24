@@ -1,8 +1,7 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="styles.css">
-		<script type="text/javascript" src="communication.js"></script>
-		<script type="text/javascript" src="utils.js"></script>
+		<script type="text/javascript" src="eventpublisher.js"></script>
 		<title>Budget</title>
 	</head>
 	<body>
@@ -48,89 +47,56 @@
 				document.getElementById("loader").style.display = "none";
 			}
 
-			const utils = new Utils();
-			const communication = new Communication({ http: null, websocket: WebSocket, utils });
-			await communication.connectWebClient("localhost",3000);
+			const publisher = new Publisher({ http: null, websocket: WebSocket});
 
-			window.regisrations=[];
 
-			const callFunction=(functionName, args, moduleName, fileSpec, className )=>{
-				return new Promise((resolve)=>{
-					let func = window[functionName];
-					if (func){
-						resolve(func(args));
-					} else {
-						const regisration = window.regisrations.find(x=>x.moduleName === moduleName && x.fileSpec === fileSpec && x.className === className);
-						if (regisration){
-							window[functionName]=(_args)=>{
-								communication.subscribe(`/${functionName}`, "websocket", async({data})=> resolve(data));
-								communication.publish(`/${functionName}`, "websocket", { moduleName, fileSpec, className, args: _args });
-							}
-							func = window[functionName];
-							func(args);
-						} else {
-							communication.subscribe("/register", "websocket", async({data})=> {
-								window.regisrations.push(data);
-								window[functionName]=(_args)=>{
-									communication.subscribe(`/${functionName}`, "websocket", async({data})=> resolve(data));
-									communication.publish(`/${functionName}`, "websocket", { moduleName, fileSpec, className, args: _args });
-								}
-								func = window[functionName];
-								func(args);
-							});
-							communication.publish(`/register`, "websocket", { moduleName, fileSpec, className });
-						}
-					}
-				});
-			}
+			// unsecurePageFromUser();
 
-			unsecurePageFromUser();
+			// document.getElementById("loader").style.display = "none";
 
-			document.getElementById("loader").style.display = "none";
+			// document.getElementById("income").value = await callFunction("getIncome", [], "budget", "lib/budget.js", "Budget" );
+			// document.getElementById("balance").value = await callFunction("getAllowance", [], "budget", "lib/budget.js", "Budget" );
 
-			document.getElementById("income").value = await callFunction("getIncome", [], "budget", "lib/budget.js", "Budget" );
-			document.getElementById("balance").value = await callFunction("getAllowance", [], "budget", "lib/budget.js", "Budget" );
+			// const budgetDate = await callFunction("getDate", [], "budget", "lib/budget.js", "Budget" );
+			// const year = budgetDate.getFullYear();
+			// const month = budgetDate.getMonth()+1;
+			// document.getElementById("month").value = `${year}-${('0' + month).slice(-2)}`;
 
-			const budgetDate = await callFunction("getDate", [], "budget", "lib/budget.js", "Budget" );
-			const year = budgetDate.getFullYear();
-			const month = budgetDate.getMonth()+1;
-			document.getElementById("month").value = `${year}-${('0' + month).slice(-2)}`;
+			// const dailyAllowance =  await callFunction("getDailyAllowance", [], "budget", "lib/balance.js", "Balance" );
+			// document.getElementById("dailyallowance").value = Math.round(dailyAllowance * 100) / 100;
 
-			const dailyAllowance =  await callFunction("getDailyAllowance", [], "budget", "lib/balance.js", "Balance" );
-			document.getElementById("dailyallowance").value = Math.round(dailyAllowance * 100) / 100;
+			// const expenses =  await callFunction("getExpenses", [], "budget", "lib/budget.js", "Budget" );
+			// for(const exp of expenses){
+			// 	createExpense(exp);
+			// };
 
-			const expenses =  await callFunction("getExpenses", [], "budget", "lib/budget.js", "Budget" );
-			for(const exp of expenses){
-				createExpense(exp);
-			};
+			// window.submit = async()=> {
+			// 	const expenses = [];
+			// 	for (const expenseEle of document.getElementById("allexpenses").children) {
+			// 		const split = expenseEle.innerText.split(":");
+			// 		if (split[0] && split[1] && expenseEle.className === "expense"){
+			// 			const name = split[0];
+			// 			const amountStr = split[1].replace("R","");
+			// 			expenses.push({name, amount: parseFloat(amountStr)});
+			// 		}
+			// 	};
+			// 	for(const expense of expenses){
+			// 		await callFunction("addExpense", [expense.name,expense.value], "budget", "lib/budget.js", "Budget" );
+			// 	};
+			// 	const incomeElement = document.getElementById("income");
 
-			window.submit = async()=> {
-				const expenses = [];
-				for (const expenseEle of document.getElementById("allexpenses").children) {
-					const split = expenseEle.innerText.split(":");
-					if (split[0] && split[1] && expenseEle.className === "expense"){
-						const name = split[0];
-						const amountStr = split[1].replace("R","");
-						expenses.push({name, amount: parseFloat(amountStr)});
-					}
-				};
-				for(const expense of expenses){
-					await callFunction("addExpense", [expense.name,expense.value], "budget", "lib/budget.js", "Budget" );
-				};
-				const incomeElement = document.getElementById("income");
+			// 	await callFunction("reset", [incomeElement.value], "budget", "lib/budget.js", "Budget" );
 
-				await callFunction("reset", [incomeElement.value], "budget", "lib/budget.js", "Budget" );
+			// 	const monthYear=document.getElementById("month").value;
+			// 	const monthYearArray=monthYear.split("-");
 
-				const monthYear=document.getElementById("month").value;
-				const monthYearArray=monthYear.split("-");
+			// 	const remainingdays = await callFunction("getRemainingDays", [monthYearArray[1]], "utils", "lib/utils.js", "Utils" );
+			// 	const allowance = await callFunction("getAllowance", [], "budget", "lib/budget.js", "Budget" );
 
-				const remainingdays = await callFunction("getRemainingDays", [monthYearArray[1]], "utils", "lib/utils.js", "Utils" );
-				const allowance = await callFunction("getAllowance", [], "budget", "lib/budget.js", "Budget" );
+			// 	await callFunction("reset", [remainingdays, allowance], "budget", "lib/balance.js", "Balance" );
 
-				await callFunction("reset", [remainingdays, allowance], "budget", "lib/balance.js", "Balance" );
-
-				location.reload();
-			}
+			// 	location.reload();
+			// }
 
 			window.addExpense = async()=> {
 				const expenseNameElement = document.getElementById("expensename");
