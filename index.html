@@ -47,8 +47,8 @@
 				document.getElementById("loader").style.display = "none";
 			}
 
-			const publisher = new Publisher({ http: null, websocket: WebSocket});
-
+			const publisher = new Publisher({ http: null, websocket: WebSocket, host:"localhost", port: 3000 });
+			publisher.client("http",true);
 
 			// unsecurePageFromUser();
 
