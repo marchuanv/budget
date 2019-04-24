@@ -54,7 +54,9 @@
 				port: 3000 
 			});
 
-			publisher.client("http",true).publish("getDate").then( () => [] );
+			publisher.client("http",true).publish("getDate").then((data) => {
+				console.log("RECEVIED DATA: ",data);
+			});
 
 			// unsecurePageFromUser();
 
