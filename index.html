@@ -47,14 +47,25 @@
 				document.getElementById("loader").style.display = "none";
 			}
 
-			const publisher = new Publisher({ 
+			const httpPublisher = new Publisher({ 
 				http: XMLHttpRequest, 
+				websocket: null, 
+				host:"localhost", 
+				port: 3000 
+			});
+
+			httpPublisher.subscribe("getDate").then((data) => {
+				console.log("RECEVIED DATA: ",data);
+			}).publish("getDate");
+
+			const websocketPublisher = new Publisher({ 
+				http: null, 
 				websocket: WebSocket, 
 				host:"localhost", 
 				port: 3000 
 			});
 
-			publisher.subscribe("getDate").then((data) => {
+			websocketPublisher.subscribe("getDate").then((data) => {
 				console.log("RECEVIED DATA: ",data);
 			}).publish("getDate");
 
