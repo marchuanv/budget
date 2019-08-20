@@ -25,5 +25,7 @@
       "index" : "index.html",
       "styles" : "styles.css"
   },
-  "dependencies": {}
+  "dependencies": {
+      "eventpublisher": "git+https://github.com/marchuanv/eventpublisher.git"
+  }
 }
