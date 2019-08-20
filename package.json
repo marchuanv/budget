@@ -25,6 +25,5 @@
       "index" : "index.html",
       "styles" : "styles.css"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
